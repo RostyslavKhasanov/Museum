@@ -1,8 +1,4 @@
-<%@ page import="jdbc.Connector" %>
-<%@ page import="services.ExhibitService" %>
-<%@ page import="java.sql.SQLException" %>
-<%@ page import="dto.ExhibitDto" %>
-<%@ page import="java.util.List" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: macbookpro
   Date: 7/16/19
@@ -13,21 +9,19 @@
 <html>
 <head>
     <title>Museum</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="WEB-INF/static/style/index.css">
 </head>
-<%
-    ExhibitService exhibitService;
-    try {
-        exhibitService = new ExhibitService(Connector.getConnection());
-        List<ExhibitDto> exhibitDtos = exhibitService.findAll();
-        for (int i = 0; i < exhibitDtos.size(); i++) {
-            out.print(exhibitDtos.get(i).getName() + "<br>");
-        }
-    } catch (ClassNotFoundException | SQLException e) {
-        e.printStackTrace();
-    }
-
-%>
 <body>
+<jsp:include page="WEB-INF/static/menu.jsp"/>
+
+<div class="main-page">
+    <h1 class="salutation">
+        Hello in our museum
+    </h1>
+</div>
 
 </body>
+
 </html>
