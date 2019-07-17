@@ -1,6 +1,7 @@
 package services;
 
 import dto.ExhibitDto;
+import exceptions.BadIdException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,5 +43,23 @@ public class ExhibitService {
               resultSet.getString(TECHNOLOGY)));
     }
     return exhibits;
+  }
+
+  public ExhibitDto findById(Integer id) throws SQLException {
+    PreparedStatement preparedStatement =
+        connection.prepareStatement("select * from museum.exhibit where " + ID + " = ?");
+    preparedStatement.setInt(1, id);
+
+    ResultSet resultSet = preparedStatement.executeQuery();
+
+    if (resultSet.next()) {
+      return new ExhibitDto(
+          resultSet.getInt(ID),
+          resultSet.getInt(AUTHOR_ID),
+          resultSet.getInt(HALL_ID),
+          resultSet.getString(NAME),
+          resultSet.getString(MATERIAL),
+          resultSet.getString(TECHNOLOGY));
+    } else throw new BadIdException("In DB no row with id " + id);
   }
 }
