@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ExcursionService {
@@ -31,9 +32,8 @@ public class ExcursionService {
     ArrayList<ExcursionDto> excursions = new ArrayList<>();
     while (resultSet.next()) {
       excursions.add(
-          new ExcursionDto(resultSet.getInt(ID), resultSet.getDate(BEGIN), resultSet.getDate(END)));
+          new ExcursionDto(resultSet.getInt(ID), resultSet.getTimestamp(BEGIN), resultSet.getTimestamp(END)));
     }
-    //    connection.close();
     return excursions;
   }
 
@@ -49,4 +49,12 @@ public class ExcursionService {
           resultSet.getInt(ID), resultSet.getDate(BEGIN), resultSet.getDate(END));
     } else throw new BadIdException("In DB no row with id " + id);
   }
+
+//  public ExcursionDto findByDate(String startDate, String endDate) throws SQLException {
+//    PreparedStatement preparedStatement = connection.prepareStatement("select * from museum.excursion between " + startDate
+//            +"and" + endDate);
+//
+//    ResultSet resultSet = preparedStatement.executeQuery();
+//
+//  }
 }
