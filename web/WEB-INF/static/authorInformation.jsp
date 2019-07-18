@@ -15,9 +15,8 @@
 <jsp:include page="menu.jsp"/>
 
 <div class="info" style="margin: 20px">
-<div class="name">Name of the exhibit is: ${exhibit.name}</div>
-<div class="material">It is of ${exhibit.material}</div>
-<div class="technology">Create technology: ${exhibit.technology}</div>
+<div class="first-name">FistName: ${author.firstName}</div>
+<div class="second-name">SecondName ${author.secondName}</div>
 </div>
 
 

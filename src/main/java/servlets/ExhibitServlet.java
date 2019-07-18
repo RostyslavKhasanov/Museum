@@ -34,7 +34,6 @@ public class ExhibitServlet extends HttpServlet {
     if (idParam != null) {
       try {
         Integer id = Integer.valueOf(idParam);
-        System.out.println("Call exhibit with id " + id);
         ExhibitDto exhibitDto = exhibitService.findById(id);
         req.setAttribute("exhibit", exhibitDto);
         req.getRequestDispatcher("WEB-INF/static/exhibitInformation.jsp").forward(req, resp);
@@ -56,7 +55,5 @@ public class ExhibitServlet extends HttpServlet {
         e.printStackTrace();
       }
     }
-
-
   }
 }

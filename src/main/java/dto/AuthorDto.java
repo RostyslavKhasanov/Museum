@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Transfer data object for Exhibit
+ * Transfer data object for Author.
  *
  * @author Nazar Stasyk
  * @version 1.0
@@ -15,11 +15,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExhibitDto {
+public class AuthorDto {
   private Integer id;
-  private Integer authorId;
-  private Integer hallId;
-  private String name;
-  private String material;
-  private String technology;
+  private String firstName;
+  private String secondName;
 }
