@@ -56,7 +56,5 @@ public class ExhibitServlet extends HttpServlet {
         e.printStackTrace();
       }
     }
-
-
   }
 }

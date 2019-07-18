@@ -9,11 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExhibitDto {
+public class AuthorDto {
   private Integer id;
-  private Integer authorId;
-  private Integer hallId;
-  private String name;
-  private String material;
-  private String technology;
+  private String fName;
+  private String sName;
 }
