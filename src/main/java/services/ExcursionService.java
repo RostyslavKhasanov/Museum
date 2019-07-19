@@ -1,6 +1,6 @@
 package services;
 
-import dtos.ExcursionDto;
+import dto.ExcursionDto;
 import exceptions.BadIdException;
 
 import java.sql.Connection;
