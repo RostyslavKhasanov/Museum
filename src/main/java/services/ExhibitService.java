@@ -83,22 +83,29 @@ public class ExhibitService {
     }
   }
 
-  public ExhibitDto findByHall(Integer hall_id) throws SQLException {
+  public List<ExhibitDto> findByHallId(Integer id) throws SQLException {
     PreparedStatement preparedStatement =
-            connection.prepareStatement("select * from museum.exhibit inner join museum.hall " +
-                    "on exhibit.hall_id = hall.id where" + HALL_ID + " = ?");
-    preparedStatement.setInt(3, hall_id);
+        connection.prepareStatement(
+            "select * from museum.exhibit inner join museum.hall "
+                + "on exhibit.hall_id = hall.id where "
+                + HALL_ID
+                + " = ?");
+    preparedStatement.setInt(1, id);
 
     ResultSet resultSet = preparedStatement.executeQuery();
 
-    if(resultSet.next()) {
-      return new ExhibitDto(
-              resultSet.getInt(ID),
-              resultSet.getInt(AUTHOR_ID),
-              resultSet.getInt(HALL_ID),
-              resultSet.getString(NAME),
-              resultSet.getString(MATERIAL),
-              resultSet.getString(TECHNOLOGY));
-    } else throw new BadIdException("In DB no row with id " + hall_id);
+   ArrayList<ExhibitDto> exhibits = new ArrayList<>();
+
+    while (resultSet.next()) {
+      exhibits.add(
+              new ExhibitDto(
+                      resultSet.getInt(ID),
+                      resultSet.getInt(AUTHOR_ID),
+                      resultSet.getInt(HALL_ID),
+                      resultSet.getString(NAME),
+                      resultSet.getString(MATERIAL),
+                      resultSet.getString(TECHNOLOGY)));
+    }
+    return exhibits;
   }
 }
