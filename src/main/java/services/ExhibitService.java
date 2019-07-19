@@ -10,13 +10,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for serve Exhibit.
+ *
+ * @author Nazar Stasyuk
+ * @version 1.0
+ */
 public class ExhibitService {
 
   private Connection connection;
 
   private final String ID = "id";
   private final String AUTHOR_ID = "author_id";
-  private final String HALL_ID = "hall_id";
+  private final String HALL_ID = "hall_Id";
   private final String NAME = "name";
   private final String MATERIAL = "material";
   private final String TECHNOLOGY = "technology";
@@ -25,6 +31,12 @@ public class ExhibitService {
     this.connection = connection;
   }
 
+  /**
+   * Method that find and return all Exhibit from DB.
+   *
+   * @return list of ExhibitDto.
+   * @exception SQLException - error in sql query.
+   */
   public List<ExhibitDto> findAll() throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement("select * from museum.exhibit");
@@ -45,6 +57,12 @@ public class ExhibitService {
     return exhibits;
   }
 
+  /**
+   * Method that find Exhibit by id.
+   *
+   * @return ExhibitDto
+   * @exception SQLException - error in sql query.
+   */
   public ExhibitDto findById(Integer id) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement("select * from museum.exhibit where " + ID + " = ?");
@@ -60,7 +78,9 @@ public class ExhibitService {
           resultSet.getString(NAME),
           resultSet.getString(MATERIAL),
           resultSet.getString(TECHNOLOGY));
-    } else throw new BadIdException("In DB no row with id " + id);
+    } else {
+      throw new BadIdException("In DB no row with id " + id);
+    }
   }
 
   public ExhibitDto findByHall(Integer hall_id) throws SQLException {
