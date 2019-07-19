@@ -22,11 +22,11 @@
     </button>
     <div class="nav navbar-nav" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="/exhibit">Exhibits</a>
-            <a class="nav-item nav-link" href="/author">Authors</a>
+            <a class="nav-item nav-link" href="/museum/exhibit">Exhibits</a>
+            <a class="nav-item nav-link" href="/museum/author">Authors</a>
             <a class="nav-item nav-link" href="#">Hall</a>
             <a class="nav-item nav-link " href="#">Excursions</a>
-            <a class="nav-item nav-link " href="#">Gid</a>
+            <a class="nav-item nav-link " href="/museum/worker">Gid</a>
             <a class="nav-item nav-link " href="#">Workers</a>
         </div>
     </div>
