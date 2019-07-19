@@ -29,16 +29,7 @@ public class ExcursionService {
 
     ResultSet resultSet = preparedStatement.executeQuery();
 
-    List<ExcursionDto> excursions = new ArrayList<>();
-    while (resultSet.next()) {
-      excursions.add(
-          new ExcursionDto(
-              resultSet.getInt(ID),
-              resultSet.getObject(BEGIN, LocalDateTime.class),
-              resultSet.getObject(END, LocalDateTime.class),
-              resultSet.getInt(WORKER_ID)));
-    }
-    return excursions;
+    return getExcursions(resultSet);
   }
 
   public ExcursionDto findById(Integer id) throws SQLException {
@@ -54,5 +45,27 @@ public class ExcursionService {
           resultSet.getObject(END, LocalDateTime.class),
           resultSet.getInt(WORKER_ID));
     } else throw new BadIdException("In excursion no row with id " + id);
+  }
+
+  public List<ExcursionDto> findByWorkerId(int worker_id) throws SQLException {
+    PreparedStatement preparedStatement =
+            connection.prepareStatement("select * from museum.excursion where worker_id = ?");
+    preparedStatement.setInt(1,worker_id);
+
+    ResultSet resultSet = preparedStatement.executeQuery();
+    return getExcursions(resultSet);
+  }
+
+  private List<ExcursionDto> getExcursions(ResultSet resultSet) throws SQLException {
+    List<ExcursionDto> excursions = new ArrayList<>();
+    while (resultSet.next()) {
+      excursions.add(
+              new ExcursionDto(
+                      resultSet.getInt(ID),
+                      resultSet.getObject(BEGIN, LocalDateTime.class),
+                      resultSet.getObject(END, LocalDateTime.class),
+                      resultSet.getInt(WORKER_ID)));
+    }
+    return excursions;
   }
 }

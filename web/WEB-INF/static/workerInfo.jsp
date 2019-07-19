@@ -7,20 +7,30 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"/>
-<div class="card">
-    <h6>Worker id: ${(worker.getId())}</h6>
-    <h6>First name: ${(worker.getFName())}</h6>
-    <h6>Last name: ${(worker.getSName())}</h6>
-    <br>
-    <c:forEach items="${worker.getHalls()}" var="item">
-        <h6>Serves ${(item.getName())}</h6>
-    </c:forEach>
-    <c:forEach items="${worker.getExcursions()}" var="item">
-        <h6>Excursion: begin - ${(item.getBegin())} end - ${(item.getEnd())}</h6>
-    </c:forEach>
-    <c:forEach items="${worker.getHalls()}" var="item">
-        <h6>${(item.getExhibits(0).getName())}</h6>
-    </c:forEach>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <div class="card">
+                <h6>Worker id: ${(worker.getId())}</h6>
+                <h6>First name: ${(worker.getFName())}</h6>
+                <h6>Last name: ${(worker.getSName())}</h6>
+                <br>
+                <c:forEach items="${worker.getHalls()}" var="item">
+                    <h6>Serves ${(item.getName())}</h6>
+                </c:forEach>
+                <c:forEach items="${worker.getExcursions()}" var="item">
+                    <h6>Excursion: begin - ${(item.getBegin())} end - ${(item.getEnd())}</h6>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="col-5">
+            <c:forEach items="${halls}" var="item">
+                <c:forEach items="${item.getExhibits()}" var="item1">
+                    <h6>${(item1.getName())}</h6>
+                </c:forEach>
+            </c:forEach>
+        </div>
+    </div>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

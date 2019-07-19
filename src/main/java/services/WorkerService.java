@@ -1,9 +1,7 @@
 package services;
 
-import dto.ExhibitDto;
 import dto.WorkerDto;
 import exceptions.BadIdException;
-import exceptions.BadNameException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -84,20 +82,19 @@ public class WorkerService {
     return getWorker(resultSet);
   }
 
-  public WorkerDto findByWorkerName(String name) throws SQLException {
+  public int findWorkerId(String name) throws SQLException {
     name = name.replaceAll("\"", "");
-    String[] arr = name.split("_");
+    String[] arr = name.split(" ");
     String firstName = arr[0];
     String lastName = arr[1];
     PreparedStatement preparedStatement =
             connection.prepareStatement(
                     "SELECT * FROM worker where fName = ? and sName = ?");
     preparedStatement.setString(1, firstName);
-    preparedStatement.setString(1, lastName);
+    preparedStatement.setString(2, lastName);
 
     ResultSet resultSet = preparedStatement.executeQuery();
-
-    return getWorker(resultSet);
+    return getWorker(resultSet).getId();
   }
 
   private WorkerDto getWorker(ResultSet resultSet) throws SQLException {

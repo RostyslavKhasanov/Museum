@@ -1,6 +1,6 @@
 package servlets;
 
-import dto.ExhibitDto;
+import dto.HallDto;
 import dto.WorkerDto;
 import jdbc.Connector;
 import services.ExcursionService;
@@ -43,16 +43,20 @@ public class WorkerServlet extends HttpServlet {
     String nameParam = req.getParameter("name");
     String idParam = req.getParameter("id");
     String posParam = req.getParameter("pos");
+    int workerId;
 
-//    if (nameParam != null) {
-//      try {
-//        List<ExhibitDto> exhibitDtoList = workerService.findExhibitByWorkerName(nameParam);
-//        req.setAttribute("exhibits", exhibitDtoList);
-//        req.getRequestDispatcher("WEB-INF/static/worker.jsp").forward(req, resp);
-//      } catch (SQLException e) {
-//        e.printStackTrace();
-//      }
-//    }
+    if (nameParam != null) {
+      try {
+        workerId = workerService.findWorkerId(nameParam);
+        System.out.println(workerId);
+        List<HallDto> halls = hallService.findByWorkerId(workerId);
+        req.setAttribute("halls", halls);
+        req.setAttribute("worker", workerService.findById(workerId));
+        req.getRequestDispatcher("WEB-INF/static/workerExhibits.jsp").forward(req, resp);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
     if (idParam != null) {
       try {
         Integer id = Integer.valueOf(idParam);

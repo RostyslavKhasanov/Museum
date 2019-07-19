@@ -66,8 +66,6 @@ public class HallService {
     return getHalls(resultSet, halls);
   }
 
-
-
   private List<HallDto> getHalls(ResultSet resultSet, ArrayList halls) throws SQLException {
     while (resultSet.next()) {
       halls.add(

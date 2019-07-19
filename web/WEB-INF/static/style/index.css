@@ -1,4 +1,4 @@
-salutation{
+salutation {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -8,6 +8,7 @@ salutation{
 tr:hover {
     background: white;
 }
+
 td a {
     text-decoration: none;
     color: black;
@@ -28,4 +29,8 @@ td a:hover {
 th a:hover {
     text-decoration: none;
     color: black;
+}
+
+.card h6 {
+    margin-left: 4%;
 }
