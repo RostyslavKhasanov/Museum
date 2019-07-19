@@ -16,7 +16,7 @@
 
 <div class="list-group">
     <c:forEach items="${exhibits}" var="item">
-        <a href="?id=${item.id}" class="list-group-item list-group-item-action disabled">${item.name}</a>
+        <p class="list-group-item list-group-item-action disabled">${item.name}</p>
     </c:forEach>
 </div>
 
