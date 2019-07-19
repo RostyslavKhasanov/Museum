@@ -15,6 +15,7 @@ import java.util.List;
 
 @WebServlet("/author")
 public class AuthorServlet extends HttpServlet {
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
@@ -55,5 +56,6 @@ public class AuthorServlet extends HttpServlet {
         e.printStackTrace();
       }
     }
+
   }
 }
