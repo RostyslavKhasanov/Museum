@@ -1,4 +1,4 @@
-package dto;
+package dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,5 +15,5 @@ public class ExcursionDto {
   private Integer id;
   private Date begin;
   private Date end;
-  private WorkerDto workerDto;
+//  private WorkerDto workerDto;
 }

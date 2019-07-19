@@ -18,7 +18,8 @@
 
 <div class="list-group">
     <c:forEach items="${hall}" var="item">
-        <a href="?id=${(item.getId())}" class="list-group-item list-group-item-action disabled">${(item.getName())}</a>
+        <a href="?id=${(item.getId())}" class="list-group-item list-group-item-action disabled">
+                ${(item.getName())}</a>
     </c:forEach>
 </div>
 

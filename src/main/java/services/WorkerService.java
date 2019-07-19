@@ -1,7 +1,7 @@
 package services;
 
-import dto.ExhibitDto;
-import dto.WorkerDto;
+import dtos.ExhibitDto;
+import dtos.WorkerDto;
 import exceptions.BadIdException;
 
 import java.sql.Connection;

@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.ExhibitDto" %><%--
+<%@ page import="dtos.ExhibitDto" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 7/18/2019
@@ -47,7 +47,7 @@
     </div>
 </div>
 <%--    <%--%>
-<%--        ArrayList<dto.ExhibitDto> list = (ArrayList<dto.ExhibitDto>) request.getAttribute("exhibits");--%>
+<%--        ArrayList<dtos.ExhibitDto> list = (ArrayList<dtos.ExhibitDto>) request.getAttribute("exhibits");--%>
 <%--        for (ExhibitDto exhibitDto : list) {--%>
 <%--            out.println(exhibitDto.getId());--%>
 <%--            out.println(exhibitDto.getName());--%>

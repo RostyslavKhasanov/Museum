@@ -1,6 +1,6 @@
 package services;
 
-import dto.HallDto;
+import dtos.HallDto;
 import exceptions.BadIdException;
 
 import java.sql.Connection;
