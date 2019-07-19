@@ -14,7 +14,11 @@
 <body>
 <jsp:include page="menu.jsp"/>
 
-${exhibit.name}
+<div class="info" style="margin: 20px">
+    <div class="name">Name of the exhibit is: ${exhibit.name}</div>
+    <div class="material">It is of ${exhibit.material}</div>
+    <div class="technology">Create technology: ${exhibit.technology}</div>
+</div>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

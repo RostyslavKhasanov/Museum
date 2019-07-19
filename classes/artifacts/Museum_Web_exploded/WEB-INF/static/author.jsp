@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: macbookpro
@@ -13,11 +14,12 @@
 <body>
 <jsp:include page="menu.jsp"/>
 
-<%--<ul class="list-group list-group-flush">
-    <c:forEach items="${exhibits}" var="item">
-        <li class="list-group-item">${item.name}</li>
+<div class="list-group">
+    <c:forEach items="${authors}" var="item">
+        <a href="?id=${item.id}"
+           class="list-group-item list-group-item-action disabled">${item.firstName} ${item.secondName}</a>
     </c:forEach>
-</ul>--%>
+</div>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
