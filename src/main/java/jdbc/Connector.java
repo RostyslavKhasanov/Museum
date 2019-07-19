@@ -27,5 +27,6 @@ public class Connector {
     Class.forName("com.mysql.cj.jdbc.Driver");
     return DriverManager.getConnection(
         DB_LINK + DB_NAME + "?useSSH=false&&serverTimezone=UTC", DB_USER, DB_PASSWORD);
+
   }
 }
