@@ -32,8 +32,10 @@ public class HallService {
     while (resultSet.next()) {
       halls.add(
           new HallDto(
-              resultSet.getInt(ID), resultSet.getInt(WORKER_ID), resultSet.getString(NAME),
-                  exhibitService.findByHallId(resultSet.getInt(ID))));
+              resultSet.getInt(ID),
+              resultSet.getInt(WORKER_ID),
+              resultSet.getString(NAME),
+              exhibitService.findByHallId(resultSet.getInt(ID))));
     }
     return halls;
   }
@@ -47,8 +49,10 @@ public class HallService {
 
     if (resultSet.next()) {
       return new HallDto(
-          resultSet.getInt(ID), resultSet.getInt(WORKER_ID), resultSet.getString(NAME),
-              exhibitService.findByHallId(resultSet.getInt(ID)));
+          resultSet.getInt(ID),
+          resultSet.getInt(WORKER_ID),
+          resultSet.getString(NAME),
+          exhibitService.findByHallId(resultSet.getInt(ID)));
     } else throw new BadIdException("In hall no row with id " + id);
   }
 }

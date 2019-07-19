@@ -1,6 +1,5 @@
 package servlets;
 
-import dto.ExhibitDto;
 import dto.HallDto;
 import jdbc.Connector;
 import services.ExhibitService;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
 
 @WebServlet("/hall")
 public class HallServlet extends HttpServlet {
@@ -35,8 +35,6 @@ public class HallServlet extends HttpServlet {
 
     String idParam = req.getParameter("id");
 
-    String hallId = req.getParameter("id");
-
     if (idParam != null) {
       try {
         Integer id = Integer.valueOf(idParam);
@@ -57,17 +55,6 @@ public class HallServlet extends HttpServlet {
         List<HallDto> hallDtos = hallService.findAll();
         req.setAttribute("hall", hallDtos);
         req.getRequestDispatcher("WEB-INF/static/hall.jsp").forward(req, resp);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
-    }
-
-    if (hallId != null) {
-      try {
-        Integer id = Integer.valueOf(hallId);
-        List<ExhibitDto> exhibits = exhibitService.findByHallId(id);
-        req.setAttribute("exhibits", exhibits);
-        req.getRequestDispatcher("WEB-INF/static/hallInfo.jsp").forward(req, resp);
       } catch (SQLException e) {
         e.printStackTrace();
       }
