@@ -81,15 +81,23 @@ public class WorkerService {
 
     ResultSet resultSet = preparedStatement.executeQuery();
 
-    if (resultSet.next()) {
-      return new WorkerDto(
-          resultSet.getInt(id),
-          resultSet.getInt(position_id),
-          resultSet.getString(fName),
-          resultSet.getString(sName),
-          hallService.findByWorkerId(resultSet.getInt(id)),
-          excursionService.findByWorkerId(resultSet.getInt(id)));
-    } else throw new BadIdException("Worker with id" + workerId + "doesn't exist");
+    return getWorker(resultSet);
+  }
+
+  public WorkerDto findByWorkerName(String name) throws SQLException {
+    name = name.replaceAll("\"", "");
+    String[] arr = name.split("_");
+    String firstName = arr[0];
+    String lastName = arr[1];
+    PreparedStatement preparedStatement =
+            connection.prepareStatement(
+                    "SELECT * FROM worker where fName = ? and sName = ?");
+    preparedStatement.setString(1, firstName);
+    preparedStatement.setString(1, lastName);
+
+    ResultSet resultSet = preparedStatement.executeQuery();
+
+    return getWorker(resultSet);
   }
 
   private WorkerDto getWorker(ResultSet resultSet) throws SQLException {
@@ -118,32 +126,4 @@ public class WorkerService {
     }
     return workers;
   }
-
-    public List<ExhibitDto> findExhibitByWorkerName(String name) throws SQLException {
-        name = name.replaceAll("\"", "");
-        String[] arr = name.split("_");
-        String firstName = arr[0];
-        String lastName = arr[1];
-        PreparedStatement preparedStatement =
-                connection.prepareStatement(
-                        "select * from exhibit e join hall h on h.id = e.hall_id"
-                                + " where h.worker_id = (select id from worker where fName = ? and sName = ?)");
-        preparedStatement.setString(1, firstName);
-        preparedStatement.setString(2, lastName);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        ArrayList<ExhibitDto> exhibits = new ArrayList<>();
-        while (resultSet.next()) {
-            exhibits.add(
-                    new ExhibitDto(
-                            resultSet.getInt(ID),
-                            resultSet.getInt(AUTHOR_ID),
-                            resultSet.getInt(HALL_ID),
-                            resultSet.getString(NAME),
-                            resultSet.getString(MATERIAL),
-                            resultSet.getString(TECHNOLOGY)));
-        }
-        return exhibits;
-    }
 }

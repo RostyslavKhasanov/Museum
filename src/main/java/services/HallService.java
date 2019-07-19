@@ -1,6 +1,6 @@
 package services;
 
-import dtos.HallDto;
+import dto.HallDto;
 import exceptions.BadIdException;
 
 import java.sql.Connection;
@@ -66,11 +66,14 @@ public class HallService {
     return getHalls(resultSet, halls);
   }
 
+
+
   private List<HallDto> getHalls(ResultSet resultSet, ArrayList halls) throws SQLException {
     while (resultSet.next()) {
       halls.add(
           new HallDto(
-              resultSet.getInt(ID), resultSet.getInt(WORKER_ID), resultSet.getString(NAME)));
+              resultSet.getInt(ID), resultSet.getInt(WORKER_ID),
+                  resultSet.getString(NAME), exhibitService.findByHallId(resultSet.getInt(ID))));
     }
     return halls;
   }

@@ -1,6 +1,6 @@
 package services;
 
-import dtos.ExhibitDto;
+import dto.ExhibitDto;
 import exceptions.BadIdException;
 
 import java.sql.Connection;
@@ -108,4 +108,28 @@ public class ExhibitService {
     }
     return exhibits;
   }
+
+//    public List<ExhibitDto> findExhibitByWorkerName(String name) throws SQLException {
+//        PreparedStatement preparedStatement =
+//                connection.prepareStatement(
+//                        "select * from exhibit e join hall h on h.id = e.hall_id"
+//                                + " where h.worker_id";
+//        preparedStatement.setString(1, firstName);
+//        preparedStatement.setString(2, lastName);
+//
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//
+//        ArrayList<ExhibitDto> exhibits = new ArrayList<>();
+//        while (resultSet.next()) {
+//            exhibits.add(
+//                    new ExhibitDto(
+//                            resultSet.getInt(ID),
+//                            resultSet.getInt(AUTHOR_ID),
+//                            resultSet.getInt(HALL_ID),
+//                            resultSet.getString(NAME),
+//                            resultSet.getString(MATERIAL),
+//                            resultSet.getString(TECHNOLOGY)));
+//        }
+//        return exhibits;
+//    }
 }

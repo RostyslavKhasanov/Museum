@@ -1,7 +1,7 @@
 package servlets;
 
-import dtos.ExhibitDto;
-import dtos.HallDto;
+import dto.ExhibitDto;
+import dto.HallDto;
 import jdbc.Connector;
 import services.ExhibitService;
 import services.HallService;

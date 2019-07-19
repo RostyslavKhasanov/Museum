@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <title>Title</title>
@@ -6,11 +7,18 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"/>
-<center>
-    <h3>id: ${(worker.getId())}</h3>
-    <h3>First name: ${(worker.getFName())}</h3>
-    <h3>Last name: ${(worker.getSName())}</h3>
-</center>
+<div class="card">
+    <h6>Worker id: ${(worker.getId())}</h6>
+    <h6>First name: ${(worker.getFName())}</h6>
+    <h6>Last name: ${(worker.getSName())}</h6>
+    <br>
+    <c:forEach items="${worker.getHalls()}" var="item">
+        <h6>Serves ${(item.getName())}</h6>
+    </c:forEach>
+    <c:forEach items="${worker.getExcursions()}" var="item">
+        <h6>Excursion: begin - ${(item.getBegin())} end - ${(item.getEnd())}</h6>
+    </c:forEach>
+</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

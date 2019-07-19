@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dtos.ExhibitDto" %><%--
+<%@ page import="dto.ExhibitDto" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 7/18/2019
@@ -20,7 +20,7 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"/>
-<div class = "worker-container">
+<div class="worker-container">
     <div class="row">
         <div class="col"></div>
         <div class="col-6">
@@ -35,7 +35,9 @@
                 <tbody>
                 <c:forEach items="${workers}" var="item">
                     <tr>
-                        <th scope="row"><a href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getId())}</a></th>
+                        <th scope="row"><a
+                                href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getId())}</a>
+                        </th>
                         <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getFName())}</a></td>
                         <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getSName())}</a></td>
                     </tr>
@@ -47,7 +49,7 @@
     </div>
 </div>
 <%--    <%--%>
-<%--        ArrayList<dtos.ExhibitDto> list = (ArrayList<dtos.ExhibitDto>) request.getAttribute("exhibits");--%>
+<%--        ArrayList<dto.ExhibitDto> list = (ArrayList<dto.ExhibitDto>) request.getAttribute("exhibits");--%>
 <%--        for (ExhibitDto exhibitDto : list) {--%>
 <%--            out.println(exhibitDto.getId());--%>
 <%--            out.println(exhibitDto.getName());--%>

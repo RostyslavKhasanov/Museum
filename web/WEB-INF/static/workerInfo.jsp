@@ -18,6 +18,9 @@
     <c:forEach items="${worker.getExcursions()}" var="item">
         <h6>Excursion: begin - ${(item.getBegin())} end - ${(item.getEnd())}</h6>
     </c:forEach>
+    <c:forEach items="${worker.getHalls()}" var="item">
+        <h6>${(item.getExhibits(0).getName())}</h6>
+    </c:forEach>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

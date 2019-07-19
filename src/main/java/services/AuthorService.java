@@ -1,6 +1,6 @@
 package services;
 
-import dtos.AuthorDto;
+import dto.AuthorDto;
 import exceptions.BadIdException;
 
 import java.sql.Connection;

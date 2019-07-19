@@ -4,6 +4,7 @@ import dto.ExhibitDto;
 import dto.WorkerDto;
 import jdbc.Connector;
 import services.ExcursionService;
+import services.ExhibitService;
 import services.HallService;
 import services.WorkerService;
 
@@ -27,9 +28,11 @@ public class WorkerServlet extends HttpServlet {
 
     HallService hallService;
     ExcursionService excursionService;
+    ExhibitService exhibitService;
 
     try {
-      hallService = new HallService(Connector.getConnection());
+      exhibitService = new ExhibitService(Connector.getConnection());
+      hallService = new HallService(Connector.getConnection(), exhibitService);
       excursionService = new ExcursionService(Connector.getConnection());
       workerService = new WorkerService(Connector.getConnection(), excursionService, hallService);
     } catch (ClassNotFoundException | SQLException e) {
@@ -41,15 +44,15 @@ public class WorkerServlet extends HttpServlet {
     String idParam = req.getParameter("id");
     String posParam = req.getParameter("pos");
 
-    if (nameParam != null) {
-      try {
-        List<ExhibitDto> exhibitDtoList = workerService.findExhibitByWorkerName(nameParam);
-        req.setAttribute("exhibits", exhibitDtoList);
-        req.getRequestDispatcher("WEB-INF/static/worker.jsp").forward(req, resp);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
-    }
+//    if (nameParam != null) {
+//      try {
+//        List<ExhibitDto> exhibitDtoList = workerService.findExhibitByWorkerName(nameParam);
+//        req.setAttribute("exhibits", exhibitDtoList);
+//        req.getRequestDispatcher("WEB-INF/static/worker.jsp").forward(req, resp);
+//      } catch (SQLException e) {
+//        e.printStackTrace();
+//      }
+//    }
     if (idParam != null) {
       try {
         Integer id = Integer.valueOf(idParam);
