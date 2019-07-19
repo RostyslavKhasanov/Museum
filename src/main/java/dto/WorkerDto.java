@@ -16,5 +16,6 @@ public class WorkerDto {
     private Integer position_id;
     private String fName;
     private String sName;
-    List<>
+    List<HallDto> halls;
+    List<ExcursionDto> excursions;
 }

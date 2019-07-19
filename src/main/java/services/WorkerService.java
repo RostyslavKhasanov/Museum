@@ -16,6 +16,9 @@ public class WorkerService {
 
     private Connection connection;
 
+    private ExcursionService excursionService;
+    private HallService hallService;
+
     private final String ID = "id";
     private final String AUTHOR_ID = "author_id";
     private final String HALL_ID = "hall_id";
@@ -29,8 +32,10 @@ public class WorkerService {
     private final String fName = "fName";
     private final String sName = "sName";
 
-    public WorkerService(Connection connection) {
+    public WorkerService(Connection connection, ExcursionService excursionService, HallService hallService) {
         this.connection = connection;
+        this.excursionService = excursionService;
+        this.hallService = hallService;
     }
 
     public List<ExhibitDto> findExhibitByWorkerName(String name) throws SQLException {
@@ -116,9 +121,10 @@ public class WorkerService {
                 return new WorkerDto(
                         resultSet.getInt(id),
                         resultSet.getInt(position_id),
-                        resultSet.getInt(excursion_id),
                         resultSet.getString(fName),
-                        resultSet.getString(sName)
+                        resultSet.getString(sName),
+                        hallService.findByWorkerId(resultSet.getInt(ID)),
+                        excursionService.
                 );
             } else throw new BadIdException("Worker with entered id doesn't exist");
     }

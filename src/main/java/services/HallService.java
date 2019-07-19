@@ -47,4 +47,7 @@ public class HallService {
           resultSet.getInt(ID), resultSet.getInt(WORKER_ID), resultSet.getString(NAME));
     } else throw new BadIdException("In DB no row with id " + id);
   }
+
+    public List<HallDto> findByWorkerId(int id) {
+    }
 }
