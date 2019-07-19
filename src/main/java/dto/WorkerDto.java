@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,7 +14,7 @@ import lombok.Setter;
 public class WorkerDto {
     private Integer id;
     private Integer position_id;
-    private Integer excursion_id;
     private String fName;
     private String sName;
+    List<>
 }

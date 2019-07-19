@@ -70,16 +70,7 @@ public class WorkerService {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         ArrayList<WorkerDto> workers = new ArrayList<>();
-        while (resultSet.next()) {
-            workers.add(
-                    new WorkerDto(
-                            resultSet.getInt(id),
-                            resultSet.getInt(position_id),
-                            resultSet.getInt(excursion_id),
-                            resultSet.getString(fName),
-                            resultSet.getString(sName)));
-        }
-        return workers;
+        return getWorkers(resultSet);
     }
 
     public List<WorkerDto> findAll() throws SQLException {
@@ -88,22 +79,23 @@ public class WorkerService {
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        ArrayList<WorkerDto> workers = new ArrayList<>();
-        while (resultSet.next()) {
-            workers.add(
-                    new WorkerDto(
-                            resultSet.getInt(id),
-                            resultSet.getInt(position_id),
-                            resultSet.getInt(excursion_id),
-                            resultSet.getString(fName),
-                            resultSet.getString(sName)));
-        }
-        return workers;
+        return getWorkers(resultSet);
     }
 
     public WorkerDto findById(int workerId) throws SQLException {
         PreparedStatement preparedStatement =
                 connection.prepareStatement("select * from worker where id = ?");
+        preparedStatement.setInt(1, workerId);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        return getWorker(resultSet);
+    }
+
+    public WorkerDto findWorkerPost(int workerId) throws SQLException {
+        PreparedStatement preparedStatement =
+                connection.prepareStatement("SELECT * FROM post p join worker w on w.position_id = p.id " +
+                        "where w.id =" + workerId + ";");
         preparedStatement.setInt(1, workerId);
 
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -117,5 +109,31 @@ public class WorkerService {
                     resultSet.getString(sName)
             );
         } else throw new BadIdException("Worker with id" + workerId + "doesn't exist");
+    }
+
+    private WorkerDto getWorker(ResultSet resultSet) throws SQLException {
+            if (resultSet.next()) {
+                return new WorkerDto(
+                        resultSet.getInt(id),
+                        resultSet.getInt(position_id),
+                        resultSet.getInt(excursion_id),
+                        resultSet.getString(fName),
+                        resultSet.getString(sName)
+                );
+            } else throw new BadIdException("Worker with entered id doesn't exist");
+    }
+
+    private List<WorkerDto> getWorkers(ResultSet resultSet) throws SQLException {
+        ArrayList<WorkerDto> workers = new ArrayList<>();
+        while (resultSet.next()) {
+            workers.add(
+                    new WorkerDto(
+                            resultSet.getInt(id),
+                            resultSet.getInt(position_id),
+                            resultSet.getInt(excursion_id),
+                            resultSet.getString(fName),
+                            resultSet.getString(sName)));
+        }
+        return workers;
     }
 }

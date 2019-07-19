@@ -31,6 +31,7 @@ public class WorkerServlet extends HttpServlet {
 
         String nameParam = req.getParameter("name");
         String idParam = req.getParameter("id");
+        String posParam = req.getParameter("pos");
 
         if (nameParam != null) {
             try {
