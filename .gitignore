@@ -11,3 +11,4 @@ gen
 .idea/workspace.xml
 src/main/resources/
 src/test/
+target/
