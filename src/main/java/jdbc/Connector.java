@@ -14,7 +14,7 @@ public class Connector {
   private static final String DB_LINK = "jdbc:mysql://localhost:3306/";
   private static final String DB_NAME = "museum";
   private static final String DB_USER = "root";
-  private static final String DB_PASSWORD = "kate";
+  private static final String DB_PASSWORD = "root";
 
   /**
    * Method for creating connection with mysql DB.

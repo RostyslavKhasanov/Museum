@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Katay
@@ -8,11 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Museum</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<jsp:include page="menu.jsp"/>
 
-
+<div class="list-group">
+    <c:forEach items="${hall}" var="item">
+        <a href="?id=${(item.getId())}" class="list-group-item list-group-item-action disabled">${(item.getName())}</a>
+    </c:forEach>
+</div>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
