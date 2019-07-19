@@ -3,7 +3,7 @@
   Created by IntelliJ IDEA.
   User: macbookpro
   Date: 7/17/19
-  Time: 8:25 PM
+  Time: 6:23 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,10 +14,11 @@
 <body>
 <jsp:include page="menu.jsp"/>
 
-<div class="info" style="margin: 20px">
-    <div class="name">Name of the exhibit is: ${exhibit.name}</div>
-    <div class="material">It is of ${exhibit.material}</div>
-    <div class="technology">Create technology: ${exhibit.technology}</div>
+<div class="list-group">
+    <c:forEach items="${authors}" var="item">
+        <a href="?id=${item.id}"
+           class="list-group-item list-group-item-action disabled">${item.firstName} ${item.secondName}</a>
+    </c:forEach>
 </div>
 
 </body>
