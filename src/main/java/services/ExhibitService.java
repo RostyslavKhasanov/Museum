@@ -82,4 +82,30 @@ public class ExhibitService {
       throw new BadIdException("In DB no row with id " + id);
     }
   }
+
+  public List<ExhibitDto> findByHallId(Integer id) throws SQLException {
+    PreparedStatement preparedStatement =
+        connection.prepareStatement(
+            "select * from museum.exhibit inner join museum.hall "
+                + "on exhibit.hall_id = hall.id where "
+                + HALL_ID
+                + " = ?");
+    preparedStatement.setInt(1, id);
+
+    ResultSet resultSet = preparedStatement.executeQuery();
+
+   ArrayList<ExhibitDto> exhibits = new ArrayList<>();
+
+    while (resultSet.next()) {
+      exhibits.add(
+              new ExhibitDto(
+                      resultSet.getInt(ID),
+                      resultSet.getInt(AUTHOR_ID),
+                      resultSet.getInt(HALL_ID),
+                      resultSet.getString(NAME),
+                      resultSet.getString(MATERIAL),
+                      resultSet.getString(TECHNOLOGY)));
+    }
+    return exhibits;
+  }
 }

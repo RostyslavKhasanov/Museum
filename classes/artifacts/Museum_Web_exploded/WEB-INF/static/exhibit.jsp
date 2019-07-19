@@ -1,39 +1,28 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: macbookpro
-  Date: 7/17/19
-  Time: 5:33 PM
+  Date: 7/16/19
+  Time: 9:04 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Museum</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </head>
 <body>
+<jsp:include page="menu.jsp"/>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Museum</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="nav navbar-nav" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" href="/museum/exhibit">Exhibits</a>
-            <a class="nav-item nav-link" href="/museum/author">Authors</a>
-            <a class="nav-item nav-link" href="#">Hall</a>
-            <a class="nav-item nav-link " href="#">Excursions</a>
-            <a class="nav-item nav-link " href="/museum/worker">Gid</a>
-            <a class="nav-item nav-link " href="#">Workers</a>
-        </div>
-    </div>
-</nav>
-
-
-
+<ul class="list-group list-group-flush">
+    <c:forEach items="${exhibits}" var="item">
+        <li class="list-group-item">${item.name}</li>
+    </c:forEach>
+</ul>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
