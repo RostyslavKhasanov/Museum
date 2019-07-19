@@ -1,9 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
-  User: macbookpro
-  Date: 7/17/19
-  Time: 8:25 PM
+  User: Katay
+  Date: 18.07.2019
+  Time: 21:53
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,13 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:include page="menu.jsp"/>
 
-<div class="info" style="margin: 20px">
-    <div class="name">Name of the exhibit is: ${exhibit.name}</div>
-    <div class="material">It is of ${exhibit.material}</div>
-    <div class="technology">Create technology: ${exhibit.technology}</div>
-</div>
+${excursion.name}
 
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
