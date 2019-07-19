@@ -18,11 +18,12 @@
 <body>
 <jsp:include page="menu.jsp"/>
 
-<ul class="list-group list-group-flush">
+<div class="list-group">
     <c:forEach items="${exhibits}" var="item">
-        <li class="list-group-item">${item.name}</li>
+        <a href="?id=${item.id}" class="list-group-item list-group-item-action disabled">${item.name}</a>
     </c:forEach>
-</ul>
+</div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

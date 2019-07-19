@@ -1,25 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: macbookpro
-  Date: 7/17/19
-  Time: 8:25 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <jsp:include page="menu.jsp"/>
-
-<div class="info" style="margin: 20px">
-    <div class="name">Name of the exhibit is: ${exhibit.name}</div>
-    <div class="material">It is of ${exhibit.material}</div>
-    <div class="technology">Create technology: ${exhibit.technology}</div>
-</div>
-
+<center>
+    <h3>id: ${(worker.getId())}</h3>
+    <h3>First name: ${(worker.getFName())}</h3>
+    <h3>Last name: ${(worker.getSName())}</h3>
+</center>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

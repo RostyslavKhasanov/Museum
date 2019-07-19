@@ -15,4 +15,5 @@ public class ExcursionDto {
   private Integer id;
   private Date begin;
   private Date end;
+  private WorkerDto workerDto;
 }
