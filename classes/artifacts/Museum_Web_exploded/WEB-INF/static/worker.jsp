@@ -36,8 +36,8 @@
                 <c:forEach items="${workers}" var="item">
                     <tr>
                         <th scope="row"><a href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getId())}</a></th>
-                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getFName())}</a></td>
-                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getSName())}</a></td>
+                        <td><a href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getFName())}</a></td>
+                        <td><a href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getSName())}</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

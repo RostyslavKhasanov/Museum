@@ -1,6 +1,6 @@
 package services;
 
-import dto.HallDto;
+import dtos.HallDto;
 import exceptions.BadIdException;
 
 import java.sql.Connection;
@@ -16,9 +16,11 @@ public class HallService {
   private final String ID = "id";
   private final String WORKER_ID = "worker_id";
   private final String NAME = "name";
+  private ExhibitService exhibitService;
 
-  public HallService(Connection connection) {
+  public HallService(Connection connection, ExhibitService exhibitService) {
     this.connection = connection;
+    this.exhibitService = exhibitService;
   }
 
   public List<HallDto> findAll() throws SQLException {
@@ -26,11 +28,14 @@ public class HallService {
 
     ResultSet resultSet = preparedStatement.executeQuery();
 
-    ArrayList<HallDto> halls = new ArrayList<>();
+    List<HallDto> halls = new ArrayList<>();
     while (resultSet.next()) {
       halls.add(
           new HallDto(
-              resultSet.getInt(ID), resultSet.getInt(WORKER_ID), resultSet.getString(NAME)));
+              resultSet.getInt(ID),
+              resultSet.getInt(WORKER_ID),
+              resultSet.getString(NAME),
+              exhibitService.findByHallId(resultSet.getInt(ID))));
     }
     return halls;
   }
@@ -44,8 +49,11 @@ public class HallService {
 
     if (resultSet.next()) {
       return new HallDto(
-          resultSet.getInt(ID), resultSet.getInt(WORKER_ID), resultSet.getString(NAME));
-    } else throw new BadIdException("In DB no row with id " + id);
+          resultSet.getInt(ID),
+          resultSet.getInt(WORKER_ID),
+          resultSet.getString(NAME),
+          exhibitService.findByHallId(resultSet.getInt(ID)));
+    } else throw new BadIdException("In hall no row with id " + id);
   }
 
   public List<HallDto> findByWorkerId(int id) throws SQLException {

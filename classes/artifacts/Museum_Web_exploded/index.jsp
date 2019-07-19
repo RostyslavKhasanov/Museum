@@ -16,8 +16,9 @@
 <body>
 <jsp:include page="WEB-INF/static/menu.jsp"/>
 
+
 <div class="main-page">
-    <h1 class="salutation">
+    <h1 class="salutation" style="margin: 20px">
         Hello in our museum
     </h1>
 </div>

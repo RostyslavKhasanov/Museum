@@ -9,6 +9,8 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 
@@ -18,17 +20,19 @@
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="nav navbar-nav" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/exhibit">Exhibits</a>
+            <a class="nav-item nav-link" href="/exhibit">Exhibits</a>
             <a class="nav-item nav-link" href="/author">Authors</a>
-            <a class="nav-item nav-link" href="#">Hall</a>
-            <a class="nav-item nav-link " href="#">Excursions</a>
-            <a class="nav-item nav-link " href="#">Gid</a>
+            <a class="nav-item nav-link" href="/hall">Hall</a>
+            <a class="nav-item nav-link " href="/excursion">Excursions</a>
+            <a class="nav-item nav-link " href="/worker">Gid</a>
             <a class="nav-item nav-link " href="#">Workers</a>
         </div>
     </div>
 </nav>
+
+
 
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
