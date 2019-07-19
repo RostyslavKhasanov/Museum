@@ -1,7 +1,7 @@
 package servlets;
 
-import dtos.ExhibitDto;
-import dtos.WorkerDto;
+import dto.ExhibitDto;
+import dto.WorkerDto;
 import jdbc.Connector;
 import services.WorkerService;
 

@@ -1,6 +1,6 @@
 package servlets;
 
-import dtos.AuthorDto;
+import dto.AuthorDto;
 import jdbc.Connector;
 import services.AuthorService;
 

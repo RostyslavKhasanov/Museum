@@ -1,19 +1,22 @@
-package dtos;
+package dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
+/**
+ * Transfer data object for Author.
+ *
+ * @author Nazar Stasyk
+ * @version 1.0
+ */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExcursionDto {
+public class AuthorDto {
   private Integer id;
-  private LocalDateTime begin;
-  private LocalDateTime end;
-  private Integer worker_id;
+  private String firstName;
+  private String secondName;
 }
