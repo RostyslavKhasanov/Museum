@@ -8,8 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:url value="excursionInfo.jsp" var="find"/>
-
 <html>
 <head>
     <title>Title</title>
@@ -25,7 +23,7 @@
             <div class="list-group">
                 <c:forEach items="${excursion}" var="item">
                     <a href="?id=${(item.getId())}" class="list-group-item list-group-item-action disabled">
-                            ${(item.getBegin())}, ${(item.getEnd())}</a>
+                            ${(item.getBegin())}, ${(item.getEnd())}, ${(item.getWorker_id())}</a>
                 </c:forEach>
             </div>
         </c:when>
