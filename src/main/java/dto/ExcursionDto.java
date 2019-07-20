@@ -16,4 +16,5 @@ public class ExcursionDto {
   private LocalDateTime begin;
   private LocalDateTime end;
   private Integer worker_id;
+
 }

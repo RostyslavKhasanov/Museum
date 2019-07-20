@@ -18,7 +18,7 @@
 <jsp:include page="menu.jsp"/>
 
     <div style="margin: 10px">
-        <form action="excursionInfo.jsp" method="post">
+        <form action="/excursion" method="get">
         <%--@declare id="startdate"--%><%--@declare id="enddate"--%>
         <h4 style="margin: 10px">Please, enter the period you want to visit excursion in our museum.</h4>
         <label for="startDate">Start:</label>

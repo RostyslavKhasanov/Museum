@@ -16,14 +16,14 @@
 <jsp:include page="menu.jsp"/>
 
 <div class="w3-container w3-content w3-center w3-padding-64 w3-card-8"
-     style="max-width: 800px; margin-top: 100px; margin-bottom: 100px">
+     style="max-width: 800px; margin: 30px">
     <h2 class="w3-wide">Excursions in given time period:</h2>
     <c:choose>
         <c:when test="${not empty excursions}">
             <div class="list-group">
                 <c:forEach items="${excursion}" var="item">
-                    <a href="?id=${(item.getId())}" class="list-group-item list-group-item-action disabled">
-                            ${(item.getBegin())}, ${(item.getEnd())}, ${(item.getWorker_id())}</a>
+                    <a href="?id=${item.id}" class="list-group-item list-group-item-action disabled">
+                            ${(item.getName())}, ${(item.getBegin())},  ${(item.getEnd())}, ${(item.getWorker_id())}</a>
                 </c:forEach>
             </div>
         </c:when>

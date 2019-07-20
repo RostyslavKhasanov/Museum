@@ -2,6 +2,7 @@ package services;
 
 import dto.ExcursionDto;
 import exceptions.BadIdException;
+import javafx.scene.input.DataFormat;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -56,13 +57,10 @@ public class ExcursionService {
     } else throw new BadIdException("In excursion no row with id " + id);
   }
 
-  public List<ExcursionDto> findByDate(LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    String start = startDate.format(formatter);
-    String end = endDate.format(formatter);
+  public List<ExcursionDto> findByDate(String start, String end) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement(
-                "select * from museum.excursion where " + BEGIN + "  >= ? and " + END + " <= ?");
+            "select * from museum.excursion where " + BEGIN + "  >= ? and " + END + " <= ?");
     preparedStatement.setString(1, start);
     preparedStatement.setString(2, end);
 
@@ -78,5 +76,51 @@ public class ExcursionService {
               resultSet.getInt(WORKER_ID)));
     }
     return excursions;
+  }
+
+  //    public List<ExcursionDto> findByDate(LocalDateTime start, LocalDateTime end) throws
+  // SQLException {
+  //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+  //        String startDate = start.format(formatter);
+  //        String endDate = start.format(formatter);
+  //        PreparedStatement preparedStatement =
+  //                connection.prepareStatement(
+  //                        "select * from museum.excursion where " + BEGIN + "  >= ? and " + END +
+  // " <= ?");
+  //        preparedStatement.setString(1, startDate);
+  //        preparedStatement.setString(2, endDate);
+  //
+  //        ResultSet resultSet = preparedStatement.executeQuery();
+  //
+  //        List<ExcursionDto> excursions = new ArrayList<>();
+  //        while (resultSet.next()) {
+  //            excursions.add(
+  //                    new ExcursionDto(
+  //                            resultSet.getInt(ID),
+  //                            resultSet.getObject(BEGIN, LocalDateTime.class),
+  //                            resultSet.getObject(END, LocalDateTime.class),
+  //                            resultSet.getInt(WORKER_ID)));
+  //        }
+  //        return excursions;
+  //    }
+
+  public int findCountByPeriod(String firstDate, String secondDate) throws SQLException {
+    int count = 0;
+    PreparedStatement preparedStatement =
+        connection.prepareStatement(
+            "select count(museum.excursion.id) "
+                + "from museum.excursion where "
+                + BEGIN
+                + "  >= ? and "
+                + END
+                + " <= ?");
+
+    preparedStatement.setDate(1, java.sql.Date.valueOf(firstDate));
+    preparedStatement.setDate(2, java.sql.Date.valueOf(secondDate));
+    ResultSet resultSet = preparedStatement.executeQuery();
+    while (resultSet.next()) {
+      count = resultSet.getInt(1);
+    }
+    return count;
   }
 }

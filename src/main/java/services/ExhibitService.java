@@ -94,17 +94,17 @@ public class ExhibitService {
 
     ResultSet resultSet = preparedStatement.executeQuery();
 
-   ArrayList<ExhibitDto> exhibits = new ArrayList<>();
+    ArrayList<ExhibitDto> exhibits = new ArrayList<>();
 
     while (resultSet.next()) {
       exhibits.add(
-              new ExhibitDto(
-                      resultSet.getInt(ID),
-                      resultSet.getInt(AUTHOR_ID),
-                      resultSet.getInt(HALL_ID),
-                      resultSet.getString(NAME),
-                      resultSet.getString(MATERIAL),
-                      resultSet.getString(TECHNOLOGY)));
+          new ExhibitDto(
+              resultSet.getInt(ID),
+              resultSet.getInt(AUTHOR_ID),
+              resultSet.getInt(HALL_ID),
+              resultSet.getString(NAME),
+              resultSet.getString(MATERIAL),
+              resultSet.getString(TECHNOLOGY)));
     }
     return exhibits;
   }
