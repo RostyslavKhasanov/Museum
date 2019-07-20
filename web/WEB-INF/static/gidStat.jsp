@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="count" value="0" scope="request" />
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -10,58 +11,32 @@
     </style>
 </head>
 <body>
-<%! int count = 0;%>
 <jsp:include page="menu.jsp"/>
-<div class="row">
+<div class="row no-gutters">
     <div class="col"></div>
     <div class="col-6">
-        <div class="card">
-            <table class="table">
-                <thead>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Count of excursions</th>
+                <th scope="col">Hours</th>
+            </tr>
+            </thead>
+            <c:forEach items="${guides}" var="item">
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">First name</th>
-                    <th scope="col">Last name</th>
+                    <th scope="row">${(item.getId())}</th>
+                    <td>${(item.getFName())}</td>
+                    <td>${(item.getSName())}</td>
+                    <td>${(item.getCountExcursion())}</td>
+                    <td>${(item.getCountHour())}</td>
                 </tr>
-                </thead>
-                <c:forEach items="${workers}" var="item">
-                    <tr>
-                        <th scope="row"><a
-                                href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getId())}</a>
-                        </th>
-                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getFName())}</a></td>
-                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getSName())}</a></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
+            </c:forEach>
+        </table>
     </div>
-    <div class="col-6">
-        <div class="card">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">First name</th>
-                    <th scope="col">Last name</th>
-                    <th scope="col">Count of excursion</th>
-                </tr>
-                </thead>
-                <c:forEach items="${guides}" var="item">
-                    <tr>
-                        <th scope="row">${(item.getId())}</th>
-                        <td>${(item.getFName())}</td>
-                        <td>${(item.getSName())}</td>
-                        <td><c:forEach items="${worker.getExcursions()}" var="item">
-                            ${(item.getId())}
-                            <%count = count + 1; %>
-                        </c:forEach></td>
-                        <td><%= count %></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-    </div>
+    <div class="col"></div>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -74,3 +49,4 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 </html>
+

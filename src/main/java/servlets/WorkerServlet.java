@@ -1,6 +1,5 @@
 package servlets;
 
-import dto.ExcursionDto;
 import dto.HallDto;
 import dto.WorkerDto;
 import jdbc.Connector;
@@ -84,7 +83,7 @@ public class WorkerServlet extends HttpServlet {
       try {
         List<WorkerDto> workers = workerService.findAllFreeGid();
         req.setAttribute("workers", workers);
-        req.getRequestDispatcher("WEB-INF/static/gidStat.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/static/gidFree.jsp").forward(req, resp);
       } catch (SQLException e) {
         e.printStackTrace();
       }

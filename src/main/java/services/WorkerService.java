@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,18 +112,6 @@ public class WorkerService {
     return getWorkers(resultSet);
   }
 
-  private WorkerDto getWorker(ResultSet resultSet) throws SQLException {
-    if (resultSet.next()) {
-      return new WorkerDto(
-          resultSet.getInt(id),
-          resultSet.getInt(position_id),
-          resultSet.getString(fName),
-          resultSet.getString(sName),
-          hallService.findByWorkerId(resultSet.getInt(id)),
-          excursionService.findByWorkerId(resultSet.getInt(id)));
-    } else throw new BadIdException("Worker with entered id doesn't exist");
-  }
-
   private List<WorkerDto> getWorkers(ResultSet resultSet) throws SQLException {
     ArrayList<WorkerDto> workers = new ArrayList<>();
     while (resultSet.next()) {
@@ -135,8 +122,47 @@ public class WorkerService {
               resultSet.getString(fName),
               resultSet.getString(sName),
               hallService.findByWorkerId(resultSet.getInt(id)),
-              excursionService.findByWorkerId(resultSet.getInt(id))));
+              excursionService.findByWorkerId(resultSet.getInt(id)),
+              findCountOfExcursion(resultSet.getInt(id)),
+              findCountOfHour(resultSet.getInt(id))));
     }
     return workers;
+  }
+
+  public Integer findCountOfHour(int worker_id) throws SQLException {
+    PreparedStatement preparedStatement =
+            connection.prepareStatement(
+                    "select sum(hour(timediff(e.begin, e.end))) as s from excursion e " +
+                            "join worker w on w.id = e.worker_id where e.worker_id = ? group by e.worker_id;");
+    preparedStatement.setInt(1,worker_id);
+    ResultSet resultSet = preparedStatement.executeQuery();
+      if (resultSet.next()) {
+          return resultSet.getInt("S");
+      } else return 0;
+  }
+
+  public Integer findCountOfExcursion(int worker_id) throws SQLException {
+    PreparedStatement preparedStatement =
+            connection.prepareStatement(
+                    "select count(*) as c from excursion where worker_id = ? group by worker_id");
+    preparedStatement.setInt(1,worker_id);
+    ResultSet resultSet = preparedStatement.executeQuery();
+      if (resultSet.next()) {
+          return resultSet.getInt("c");
+      } else return 0;
+  }
+
+  private WorkerDto getWorker(ResultSet resultSet) throws SQLException {
+    if (resultSet.next()) {
+      return new WorkerDto(
+              resultSet.getInt(id),
+              resultSet.getInt(position_id),
+              resultSet.getString(fName),
+              resultSet.getString(sName),
+              hallService.findByWorkerId(resultSet.getInt(id)),
+              excursionService.findByWorkerId(resultSet.getInt(id)),
+              findCountOfExcursion(resultSet.getInt(id)),
+              findCountOfHour(resultSet.getInt(id)));
+    } else throw new BadIdException("Worker with entered id doesn't exist");
   }
 }

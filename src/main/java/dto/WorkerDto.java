@@ -18,4 +18,6 @@ public class WorkerDto {
     private String sName;
     List<HallDto> halls;
     List<ExcursionDto> excursions;
+    private Integer countExcursion;
+    private Integer countHour;
 }
