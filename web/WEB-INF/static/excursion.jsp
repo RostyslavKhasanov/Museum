@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:url value="excursionInfo.jsp" var="find"/>
+<c:url value="/excursion" var="find"/>
 
 <html>
 <head>
@@ -19,7 +19,7 @@
 <body>
 <jsp:include page="menu.jsp"/>
 
-<form method="post" action=${find}>
+<form method="post" action="${find}" >
     <div style="margin: 10px">
         <%--@declare id="startdate"--%><%--@declare id="enddate"--%>
         <h4 style="margin: 10px">Please, enter the period you want to visit excursion in our museum.</h4>
@@ -31,7 +31,6 @@
         <input style="margin: 20px 0" type="submit" value="Submit"/>
     </div>
 </form>
-
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
