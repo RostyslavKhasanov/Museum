@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +48,6 @@ public class WorkerService {
 
     ResultSet resultSet = preparedStatement.executeQuery();
 
-    ArrayList<WorkerDto> workers = new ArrayList<>();
     return getWorkers(resultSet);
   }
 
@@ -95,6 +96,21 @@ public class WorkerService {
 
     ResultSet resultSet = preparedStatement.executeQuery();
     return getWorker(resultSet).getId();
+  }
+
+  public List<WorkerDto> findAllFreeGid() throws SQLException {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//    LocalDateTime dateTime = LocalDateTime.now();
+//    String formattedDateTime = dateTime.format(formatter);
+    String formattedDateTime = "2019-07-14 11:00";
+    PreparedStatement preparedStatement =
+            connection.prepareStatement(
+                    "select * from  worker w join excursion e on e.worker_id = w.id where e.begin > ?"
+                            + "and e.end > ? group by w.fName");
+    preparedStatement.setString(1,formattedDateTime);
+    preparedStatement.setString(2,formattedDateTime);
+    ResultSet resultSet = preparedStatement.executeQuery();
+    return getWorkers(resultSet);
   }
 
   private WorkerDto getWorker(ResultSet resultSet) throws SQLException {

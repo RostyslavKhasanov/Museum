@@ -1,31 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.ExhibitDto" %><%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 7/18/2019
-  Time: 10:03 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         <%@include file="style/index.css"%>
     </style>
-    <title>Museum</title>
-    <link rel="stylesheet" href="style/index.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<%! int count = 0;%>
 <jsp:include page="menu.jsp"/>
-<div class="worker-container">
-    <div class="row">
-        <div class="col">
-        </div>
-        <div class="col-6">
-            <table class="table table-hover">
+<div class="row">
+    <div class="col"></div>
+    <div class="col-6">
+        <div class="card">
+            <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -33,7 +24,6 @@
                     <th scope="col">Last name</th>
                 </tr>
                 </thead>
-                <tbody>
                 <c:forEach items="${workers}" var="item">
                     <tr>
                         <th scope="row"><a
@@ -43,30 +33,37 @@
                         <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getSName())}</a></td>
                     </tr>
                 </c:forEach>
-                </tbody>
             </table>
         </div>
-        <div class="col">
-            <div class="col-10">
-            <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="spanName">Full name</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="name">
-            </div>
-                <button type="button" class="btn btn-primary" onclick="findByName()">Search</button>
-            </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Count of excursion</th>
+                </tr>
+                </thead>
+                <c:forEach items="${guides}" var="item">
+                    <tr>
+                        <th scope="row">${(item.getId())}</th>
+                        <td>${(item.getFName())}</td>
+                        <td>${(item.getSName())}</td>
+                        <td><c:forEach items="${worker.getExcursions()}" var="item">
+                            ${(item.getId())}
+                            <%count = count + 1; %>
+                        </c:forEach></td>
+                        <td><%= count %></td>
+                    </tr>
+                </c:forEach>
+            </table>
         </div>
     </div>
 </div>
-</table>
 </body>
-<script>
-    function findByName() {
-        var fName = document.getElementById("name").value;
-        document.location.href = "http://localhost:8080/worker?name=" + fName;
-    }
-</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

@@ -1,5 +1,6 @@
 package servlets;
 
+import dto.ExcursionDto;
 import dto.HallDto;
 import dto.WorkerDto;
 import jdbc.Connector;
@@ -43,6 +44,8 @@ public class WorkerServlet extends HttpServlet {
     String nameParam = req.getParameter("name");
     String idParam = req.getParameter("id");
     String posParam = req.getParameter("pos");
+    String dateParam = req.getParameter("date");
+    String statParam = req.getParameter("stat");
     int workerId;
 
     if (nameParam != null) {
@@ -76,10 +79,30 @@ public class WorkerServlet extends HttpServlet {
       } catch (SQLException e) {
         e.printStackTrace();
       }
+    }
+    if (dateParam != null) {
+      try {
+        List<WorkerDto> workers = workerService.findAllFreeGid();
+        req.setAttribute("workers", workers);
+        req.getRequestDispatcher("WEB-INF/static/gidStat.jsp").forward(req, resp);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
+    if (statParam != null) {
+      try {
+        List<WorkerDto> workers = workerService.findByWorkerPosition(1);
+        req.setAttribute("guides", workers);
+        req.getRequestDispatcher("WEB-INF/static/gidStat.jsp").forward(req, resp);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
     } else {
       try {
         List<WorkerDto> workerDtoList = workerService.findAll();
+        List<WorkerDto> workerDtoLists = workerService.findAllFreeGid();
         req.setAttribute("workers", workerDtoList);
+        req.setAttribute("workerss", workerDtoLists);
         req.getRequestDispatcher("WEB-INF/static/worker.jsp").forward(req, resp);
       } catch (SQLException e) {
         e.printStackTrace();

@@ -43,7 +43,10 @@
                 </tbody>
             </table>
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" onclick="redirect()">Available guides</button>
+            <button type="button" class="btn btn-primary" onclick="redirectStat()">View guides statistic</button>
+        </div>
     </div>
 </div>
 <%--    <%--%>
@@ -58,6 +61,14 @@
 <%--    %>--%>
 </table>
 </body>
+<script>
+    function redirect() {
+        document.location.href = "http://localhost:8080/worker?date=s";
+    }
+    function redirectStat() {
+        document.location.href = "http://localhost:8080/worker?stat=s";
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
