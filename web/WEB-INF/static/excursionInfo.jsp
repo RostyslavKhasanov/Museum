@@ -18,7 +18,7 @@
 <div class="w3-container w3-content w3-center w3-padding-64 w3-card-8"
      style="max-width: 800px; margin: 30px">
     <h2 class="w3-wide">Excursions in given time period:</h2>
-    <c:choose>
+   <%-- <c:choose>
         <c:when test="${not empty excursions}">
             <div class="list-group">
                 <c:forEach items="${excursion}" var="item">
@@ -30,7 +30,12 @@
         <c:otherwise>
             <h3 class="w3-wide">not found!</h3>
         </c:otherwise>
-    </c:choose>
+    </c:choose>--%>
+
+    <c:forEach items="${excursions}" var="item">
+        <a href="?id=${item.id}" class="list-group-item list-group-item-action disabled">
+                 ${item.begin},  ${item.end}</a>
+    </c:forEach>
 </div>
 
 </body>

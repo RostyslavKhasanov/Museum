@@ -2,9 +2,11 @@ package services;
 
 import dto.ExcursionDto;
 import exceptions.BadIdException;
-import javafx.scene.input.DataFormat;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -57,16 +59,19 @@ public class ExcursionService {
     } else throw new BadIdException("In excursion no row with id " + id);
   }
 
-  public List<ExcursionDto> findByDate(String start, String end) throws SQLException {
+  public List<ExcursionDto> findByDate(LocalDateTime start, LocalDateTime end) throws SQLException {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     PreparedStatement preparedStatement =
         connection.prepareStatement(
-            "select * from museum.excursion where " + BEGIN + "  >= ? and " + END + " <= ?");
-    preparedStatement.setString(1, start);
-    preparedStatement.setString(2, end);
-
+            "select * from museum.excursion where begin >= '"
+                + start.format(formatter)
+                + "' and end <= '"
+                + end.format(formatter)
+                + "'");
     ResultSet resultSet = preparedStatement.executeQuery();
 
     List<ExcursionDto> excursions = new ArrayList<>();
+
     while (resultSet.next()) {
       excursions.add(
           new ExcursionDto(

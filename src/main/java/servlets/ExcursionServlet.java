@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @WebServlet("/excursion")
@@ -27,7 +28,7 @@ public class ExcursionServlet extends HttpServlet {
       e.printStackTrace();
       return;
     }
-
+    /*
     String start = req.getParameter("dateStart");
     String end = req.getParameter("dateEnd");
 
@@ -43,22 +44,44 @@ public class ExcursionServlet extends HttpServlet {
       req.getRequestDispatcher("WEB-INF/static/excursion.jsp").forward(req, resp);
     }
 
-    //    String idParam = req.getParameter("id");
-    //
-    //    if (idParam != null) {
-    //      try {
-    //        Integer id = Integer.valueOf(idParam);
-    //        ExcursionDto excursionDto = excursionService.findById(id);
-    //        req.setAttribute("exhibit", excursionDto);
-    //        req.getRequestDispatcher("WEB-INF/static/exhibitInformation.jsp").forward(req, resp);
-    //      } catch (NumberFormatException e) {
-    //        System.out.println(
-    //            "You have to input number that low than: "
-    //                + Integer.MAX_VALUE
-    //                + "or great than "
-    //                + Integer.MIN_VALUE);
-    //      } catch (SQLException e) {
-    //        e.printStackTrace();
-    //      }
+        String idParam = req.getParameter("id");
+
+        if (idParam != null) {
+          try {
+            Integer id = Integer.valueOf(idParam);
+            ExcursionDto excursionDto = excursionService.findById(id);
+            req.setAttribute("exhibit", excursionDto);
+            req.getRequestDispatcher("WEB-INF/static/exhibitInformation.jsp").forward(req, resp);
+          } catch (NumberFormatException e) {
+            System.out.println(
+                "You have to input number that low than: "
+                    + Integer.MAX_VALUE
+                    + "or great than "
+                    + Integer.MIN_VALUE);
+          } catch (SQLException e) {
+            e.printStackTrace();
+          }
+          */
+
+    req.getRequestDispatcher("WEB-INF/static/excursion.jsp").forward(req, resp);
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
+    String startTime = req.getParameter("startTime");
+    String endTime = req.getParameter("endTime");
+
+    if (startTime != null && endTime != null) {
+      try {
+        List<ExcursionDto> excursions =
+            excursionService.findByDate(
+                LocalDateTime.parse(startTime), LocalDateTime.parse(endTime));
+        req.setAttribute("excursions", excursions);
+        req.getRequestDispatcher("WEB-INF/static/excursionInfo.jsp").forward(req, resp);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
   }
 }

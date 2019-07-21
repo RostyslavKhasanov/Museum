@@ -17,20 +17,43 @@
 <body>
 <jsp:include page="menu.jsp"/>
 
-    <div style="margin: 10px">
-        <form action="/excursion" method="get">
-        <%--@declare id="startdate"--%><%--@declare id="enddate"--%>
-        <h4 style="margin: 10px">Please, enter the period you want to visit excursion in our museum.</h4>
-        <label for="startDate">Start:</label>
-        <input id="datetime-start" type="text" name="dateStart"  value="${start}" placeholder="(yyyy-mm-dd hh:mm)"/><br/>
-        <br/>
-        <label for="endDate">End:</label>
-        <input id="datetime-end" type="text" name="dateEnd" value="${end}" placeholder="(yyyy-mm-dd hh:mm)"/><br/>
-        <input style="margin: 20px 0" type="submit" value="Submit"/>
-        </form>
-    </div>
+<%-- <div style="margin: 10px">
+     <form action="/excursion" method="get">
+     &lt;%&ndash;@declare id="startdate"&ndash;%&gt;&lt;%&ndash;@declare id="enddate"&ndash;%&gt;
+     <h4 style="margin: 10px">Please, enter the period you want to visit excursion in our museum.</h4>
+     <label for="startDate">Start:</label>
+     <input id="datetime-start" type="text" name="dateStart"  value="${start}" placeholder="(yyyy-mm-dd hh:mm)"/><br/>
+     <br/>
+     <label for="endDate">End:</label>
+     <input id="datetime-end" type="text" name="dateEnd" value="${end}" placeholder="(yyyy-mm-dd hh:mm)"/><br/>
+     <input style="margin: 20px 0" type="submit" value="Submit"/>
+     </form>
+ </div>--%>
+<h1>Please, enter the period you want to visit excursion in our museum.</h1>
+
+<form method="post">
+    <p>Input start time:</p>
+    <input id="startTime" type="datetime-local" name="startTime">
+    <p>Input end time:</p>
+    <input id="endTime" type="datetime-local" name="endTime">
+    <input type="submit" value="Submit">
+</form>
+
+
 </body>
 
+
+<%--
+<script>
+
+    function submit() {
+        var startTime = document.getElementById('startTime');
+        var endTime = document.getElementById('endTime');
+
+    }
+
+
+</script>--%>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
