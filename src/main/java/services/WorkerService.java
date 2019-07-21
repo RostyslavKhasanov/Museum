@@ -207,8 +207,7 @@ public class WorkerService {
   }
 
   /**
-   * Method for get WorkerDto by the result set.
-   * Almost this method for fix duplicate code
+   * Method for get WorkerDto by the result set. Almost this method for fix duplicate code
    *
    * @return WorkerDto
    * @exception SQLException - error in sql query
