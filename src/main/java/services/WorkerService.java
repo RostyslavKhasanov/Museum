@@ -131,8 +131,8 @@ public class WorkerService {
    */
   public List<WorkerDto> findAllFreeGid() throws SQLException {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.now();
-        String formattedDateTime = dateTime.format(formatter);
+    LocalDateTime dateTime = LocalDateTime.now();
+    String formattedDateTime = dateTime.format(formatter);
     PreparedStatement preparedStatement =
         connection.prepareStatement(
             "select w.* from  worker w join excursion e on e.worker_id = w.id where e.begin > ?"
