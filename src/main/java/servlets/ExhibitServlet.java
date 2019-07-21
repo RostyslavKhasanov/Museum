@@ -1,6 +1,8 @@
 package servlets;
 
 import dto.ExhibitDto;
+import dto.ExhibitMaterialDto;
+import dto.ExhibitTechnologyDto;
 import jdbc.Connector;
 import services.ExhibitService;
 
@@ -30,6 +32,7 @@ public class ExhibitServlet extends HttpServlet {
     }
 
     String idParam = req.getParameter("id");
+    String statParam = req.getParameter("stat");
 
     if (idParam != null) {
       try {
@@ -46,7 +49,17 @@ public class ExhibitServlet extends HttpServlet {
       } catch (SQLException e) {
         e.printStackTrace();
       }
-    } else {
+    } else if (statParam != null) {
+      try {
+        List<ExhibitMaterialDto> exhibitMaterials = exhibitService.findExhibitMaterialStatistic();
+        List<ExhibitTechnologyDto> exhibitTechnologies = exhibitService.findExhibitTechnologyStatistic();
+        req.setAttribute("exhibitMaterials", exhibitMaterials);
+        req.setAttribute("exhibitTechnologies", exhibitTechnologies);
+        req.getRequestDispatcher("WEB-INF/static/exhibitStatistic.jsp").forward(req, resp);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+       } else {
       try {
         List<ExhibitDto> exhibitDtoList = exhibitService.findAll();
         req.setAttribute("exhibits", exhibitDtoList);

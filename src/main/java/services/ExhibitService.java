@@ -1,6 +1,8 @@
 package services;
 
 import dto.ExhibitDto;
+import dto.ExhibitMaterialDto;
+import dto.ExhibitTechnologyDto;
 import exceptions.BadIdException;
 
 import java.sql.Connection;
@@ -82,7 +84,12 @@ public class ExhibitService {
       throw new BadIdException("In DB no row with id " + id);
     }
   }
-
+  /**
+   * Method that find Exhibit by Hall.
+   *
+   * @return List of ExhibitDto
+   * @exception SQLException - error in sql query.
+   */
   public List<ExhibitDto> findByHallId(Integer id) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement(
@@ -94,18 +101,56 @@ public class ExhibitService {
 
     ResultSet resultSet = preparedStatement.executeQuery();
 
-   ArrayList<ExhibitDto> exhibits = new ArrayList<>();
+    ArrayList<ExhibitDto> exhibits = new ArrayList<>();
 
     while (resultSet.next()) {
       exhibits.add(
-              new ExhibitDto(
-                      resultSet.getInt(ID),
-                      resultSet.getInt(AUTHOR_ID),
-                      resultSet.getInt(HALL_ID),
-                      resultSet.getString(NAME),
-                      resultSet.getString(MATERIAL),
-                      resultSet.getString(TECHNOLOGY)));
+          new ExhibitDto(
+              resultSet.getInt(ID),
+              resultSet.getInt(AUTHOR_ID),
+              resultSet.getInt(HALL_ID),
+              resultSet.getString(NAME),
+              resultSet.getString(MATERIAL),
+              resultSet.getString(TECHNOLOGY)));
     }
     return exhibits;
+  }
+
+  /**
+   * Method that find Exhibit materialName for statistic.
+   *
+   * @return List of ExhibitMaterialDto
+   * @exception SQLException - error in sql query.
+   */
+  public List<ExhibitMaterialDto> findExhibitMaterialStatistic() throws SQLException {
+    PreparedStatement preparedStatement =
+        connection.prepareStatement(
+            "select material, count(material) from exhibit group by material");
+    ResultSet resultSet = preparedStatement.executeQuery();
+    List<ExhibitMaterialDto> exhibitMaterials = new ArrayList<>();
+    while (resultSet.next()) {
+      exhibitMaterials.add(
+          new ExhibitMaterialDto(resultSet.getString(MATERIAL), resultSet.getInt(2)));
+    }
+    return exhibitMaterials;
+  }
+
+  /**
+   * Method that find Exhibit materialName for statistic.
+   *
+   * @return List of ExhibitTechnologyDto
+   * @exception SQLException - error in sql query.
+   */
+  public List<ExhibitTechnologyDto> findExhibitTechnologyStatistic() throws SQLException {
+    PreparedStatement preparedStatement =
+        connection.prepareStatement(
+            "select technology, count(technology) from exhibit group by technology");
+    ResultSet resultSet = preparedStatement.executeQuery();
+    List<ExhibitTechnologyDto> exhibitTechnologies = new ArrayList<>();
+    while (resultSet.next()) {
+      exhibitTechnologies.add(
+          new ExhibitTechnologyDto(resultSet.getString(TECHNOLOGY), resultSet.getInt(2)));
+    }
+    return exhibitTechnologies;
   }
 }

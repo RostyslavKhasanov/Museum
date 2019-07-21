@@ -18,7 +18,7 @@ public class WorkerService {
   private final String ID = "id";
   private final String AUTHOR_ID = "author_id";
   private final String HALL_ID = "hall_id";
-  private final String NAME = "name";
+  private final String NAME = "materialName";
   private final String MATERIAL = "material";
   private final String TECHNOLOGY = "technology";
 

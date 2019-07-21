@@ -29,7 +29,7 @@ public class WorkerServlet extends HttpServlet {
             return;
         }
 
-        String nameParam = req.getParameter("name");
+        String nameParam = req.getParameter("materialName");
         String idParam = req.getParameter("id");
 
         if (nameParam != null) {

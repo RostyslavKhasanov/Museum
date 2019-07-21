@@ -50,9 +50,9 @@
 <%--        ArrayList<dto.ExhibitDto> list = (ArrayList<dto.ExhibitDto>) request.getAttribute("exhibits");--%>
 <%--        for (ExhibitDto exhibitDto : list) {--%>
 <%--            out.println(exhibitDto.getId());--%>
-<%--            out.println(exhibitDto.getName());--%>
-<%--            out.println(exhibitDto.getMaterial());--%>
-<%--            out.println(exhibitDto.getTechnology());--%>
+<%--            out.println(exhibitDto.getMaterialName());--%>
+<%--            out.println(exhibitDto.getMaterialName());--%>
+<%--            out.println(exhibitDto.getMaterialName());--%>
 <%--            out.write("<br>");--%>
 <%--        }--%>
 <%--    %>--%>
