@@ -28,8 +28,8 @@
             <c:forEach items="${guides}" var="item">
                 <tr>
                     <th scope="row">${(item.getId())}</th>
-                    <td>${(item.getFName())}</td>
-                    <td>${(item.getSName())}</td>
+                    <td>${(item.getFirstName())}</td>
+                    <td>${(item.getLastName())}</td>
                     <td>${(item.getCountExcursion())}</td>
                     <td>${(item.getCountHour())}</td>
                 </tr>

@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="menu.jsp"/>
 <div class="card">
-    <h6>Exhibits of ${(worker.getFName())} ${(worker.getSName())} :</h6>
+    <h6>Exhibits of ${(worker.getFirstName())} ${(worker.getLastName())} :</h6>
     <br>
     <c:forEach items="${halls}" var="item">
         <c:forEach items="${item.getExhibits()}" var="item1">

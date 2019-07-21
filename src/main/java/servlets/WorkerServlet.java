@@ -99,9 +99,7 @@ public class WorkerServlet extends HttpServlet {
     } else {
       try {
         List<WorkerDto> workerDtoList = workerService.findAll();
-        List<WorkerDto> workerDtoLists = workerService.findAllFreeGid();
         req.setAttribute("workers", workerDtoList);
-        req.setAttribute("workerss", workerDtoLists);
         req.getRequestDispatcher("WEB-INF/static/worker.jsp").forward(req, resp);
       } catch (SQLException e) {
         e.printStackTrace();

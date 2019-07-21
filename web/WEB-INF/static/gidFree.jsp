@@ -28,8 +28,8 @@
                         <th scope="row"><a
                                 href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getId())}</a>
                         </th>
-                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getFName())}</a></td>
-                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getSName())}</a></td>
+                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getFirstName())}</a></td>
+                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getLastName())}</a></td>
                     </tr>
                 </c:forEach>
             </table>

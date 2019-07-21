@@ -18,18 +18,10 @@ public class WorkerService {
   private ExcursionService excursionService;
   private HallService hallService;
 
-  private final String ID = "id";
-  private final String AUTHOR_ID = "author_id";
-  private final String HALL_ID = "hall_id";
-  private final String NAME = "name";
-  private final String MATERIAL = "material";
-  private final String TECHNOLOGY = "technology";
-
   private final String id = "id";
-  private final String position_id = "position_id";
-  private final String excursion_id = "excursion_id";
-  private final String fName = "fName";
-  private final String sName = "sName";
+  private final String positionId = "position_id";
+  private final String firstName = "fName";
+  private final String lastName = "sName";
 
   public WorkerService(
       Connection connection, ExcursionService excursionService, HallService hallService) {
@@ -38,12 +30,10 @@ public class WorkerService {
     this.hallService = hallService;
   }
 
-
-
-  public List<WorkerDto> findByWorkerPosition(int pos_id) throws SQLException {
+  public List<WorkerDto> findByWorkerPosition(int posId) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement("select * from worker where position_id = ?");
-    preparedStatement.setInt(1, pos_id);
+    preparedStatement.setInt(1, posId);
 
     ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -88,8 +78,7 @@ public class WorkerService {
     String firstName = arr[0];
     String lastName = arr[1];
     PreparedStatement preparedStatement =
-            connection.prepareStatement(
-                    "SELECT * FROM worker where fName = ? and sName = ?");
+        connection.prepareStatement("SELECT * FROM worker where fName = ? and sName = ?");
     preparedStatement.setString(1, firstName);
     preparedStatement.setString(2, lastName);
 
@@ -99,17 +88,44 @@ public class WorkerService {
 
   public List<WorkerDto> findAllFreeGid() throws SQLException {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//    LocalDateTime dateTime = LocalDateTime.now();
-//    String formattedDateTime = dateTime.format(formatter);
+    //    LocalDateTime dateTime = LocalDateTime.now();
+    //    String formattedDateTime = dateTime.format(formatter);
     String formattedDateTime = "2019-07-14 11:00";
     PreparedStatement preparedStatement =
-            connection.prepareStatement(
-                    "select * from  worker w join excursion e on e.worker_id = w.id where e.begin > ?"
-                            + "and e.end > ? group by w.fName");
-    preparedStatement.setString(1,formattedDateTime);
-    preparedStatement.setString(2,formattedDateTime);
+        connection.prepareStatement(
+            "select * from  worker w join excursion e on e.worker_id = w.id where e.begin > ?"
+                + "and e.end > ? group by w.fName");
+    preparedStatement.setString(1, formattedDateTime);
+    preparedStatement.setString(2, formattedDateTime);
     ResultSet resultSet = preparedStatement.executeQuery();
     return getWorkers(resultSet);
+  }
+
+  public Integer findCountOfExcursion(int workerId) throws SQLException {
+    PreparedStatement preparedStatement =
+        connection.prepareStatement(
+            "select count(*) as c from excursion where worker_id = ? group by worker_id");
+    preparedStatement.setInt(1, workerId);
+    ResultSet resultSet = preparedStatement.executeQuery();
+    if (resultSet.next()) {
+      return resultSet.getInt("c");
+    } else {
+      return 0;
+    }
+  }
+
+  public Integer findCountOfHour(int workerId) throws SQLException {
+    PreparedStatement preparedStatement =
+        connection.prepareStatement(
+            "select sum(hour(timediff(e.begin, e.end))) as s from excursion e "
+                + "join worker w on w.id = e.worker_id where e.worker_id = ? group by e.worker_id;");
+    preparedStatement.setInt(1, workerId);
+    ResultSet resultSet = preparedStatement.executeQuery();
+    if (resultSet.next()) {
+      return resultSet.getInt("S");
+    } else {
+      return 0;
+    }
   }
 
   private List<WorkerDto> getWorkers(ResultSet resultSet) throws SQLException {
@@ -118,9 +134,9 @@ public class WorkerService {
       workers.add(
           new WorkerDto(
               resultSet.getInt(id),
-              resultSet.getInt(position_id),
-              resultSet.getString(fName),
-              resultSet.getString(sName),
+              resultSet.getInt(positionId),
+              resultSet.getString(firstName),
+              resultSet.getString(lastName),
               hallService.findByWorkerId(resultSet.getInt(id)),
               excursionService.findByWorkerId(resultSet.getInt(id)),
               findCountOfExcursion(resultSet.getInt(id)),
@@ -129,40 +145,19 @@ public class WorkerService {
     return workers;
   }
 
-  public Integer findCountOfHour(int worker_id) throws SQLException {
-    PreparedStatement preparedStatement =
-            connection.prepareStatement(
-                    "select sum(hour(timediff(e.begin, e.end))) as s from excursion e " +
-                            "join worker w on w.id = e.worker_id where e.worker_id = ? group by e.worker_id;");
-    preparedStatement.setInt(1,worker_id);
-    ResultSet resultSet = preparedStatement.executeQuery();
-      if (resultSet.next()) {
-          return resultSet.getInt("S");
-      } else return 0;
-  }
-
-  public Integer findCountOfExcursion(int worker_id) throws SQLException {
-    PreparedStatement preparedStatement =
-            connection.prepareStatement(
-                    "select count(*) as c from excursion where worker_id = ? group by worker_id");
-    preparedStatement.setInt(1,worker_id);
-    ResultSet resultSet = preparedStatement.executeQuery();
-      if (resultSet.next()) {
-          return resultSet.getInt("c");
-      } else return 0;
-  }
-
   private WorkerDto getWorker(ResultSet resultSet) throws SQLException {
     if (resultSet.next()) {
       return new WorkerDto(
-              resultSet.getInt(id),
-              resultSet.getInt(position_id),
-              resultSet.getString(fName),
-              resultSet.getString(sName),
-              hallService.findByWorkerId(resultSet.getInt(id)),
-              excursionService.findByWorkerId(resultSet.getInt(id)),
-              findCountOfExcursion(resultSet.getInt(id)),
-              findCountOfHour(resultSet.getInt(id)));
-    } else throw new BadIdException("Worker with entered id doesn't exist");
+          resultSet.getInt(id),
+          resultSet.getInt(positionId),
+          resultSet.getString(firstName),
+          resultSet.getString(lastName),
+          hallService.findByWorkerId(resultSet.getInt(id)),
+          excursionService.findByWorkerId(resultSet.getInt(id)),
+          findCountOfExcursion(resultSet.getInt(id)),
+          findCountOfHour(resultSet.getInt(id)));
+    } else {
+      throw new BadIdException("Worker with entered id doesn't exist");
+    }
   }
 }
