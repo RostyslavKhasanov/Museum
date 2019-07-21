@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="java.time.format.DateTimeFormatter" %>
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -20,7 +22,8 @@
         <h6>Serves ${(item.getName())}</h6>
     </c:forEach>
     <c:forEach items="${worker.getExcursions()}" var="item">
-        <h6>Excursion: begin - ${(item.getBegin())} end - ${(item.getEnd())}</h6>
+        <h6>Excursion: begin - ${(item.getBegin()).format( DateTimeFormatter.ofPattern("dd.MM.yyyy HH-mm"))}
+            end - ${(item.getEnd()).format( DateTimeFormatter.ofPattern("dd.MM.yyyy HH-mm"))}</h6>
     </c:forEach>
 </div>
 <div class="col-5">
