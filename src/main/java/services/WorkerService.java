@@ -11,6 +11,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for serve Worker.
+ *
+ * @author Rostyslav Khasanov
+ * @version 1.0
+ */
 public class WorkerService {
 
   private Connection connection;
@@ -30,6 +36,12 @@ public class WorkerService {
     this.hallService = hallService;
   }
 
+  /**
+   * Method for find workers by their position
+   *
+   * @return List of WorkerDto
+   * @exception SQLException - error in sql query
+   */
   public List<WorkerDto> findByWorkerPosition(int posId) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement("select * from worker where position_id = ?");
@@ -40,6 +52,12 @@ public class WorkerService {
     return getWorkers(resultSet);
   }
 
+  /**
+   * Method for find all workers in DB
+   *
+   * @return List of WorkerDto
+   * @exception SQLException - error in sql query
+   */
   public List<WorkerDto> findAll() throws SQLException {
     PreparedStatement preparedStatement = connection.prepareStatement("select * from worker");
 
@@ -48,6 +66,12 @@ public class WorkerService {
     return getWorkers(resultSet);
   }
 
+  /**
+   * Method for find worker by id
+   *
+   * @return WorkerDto
+   * @exception SQLException - error in sql query
+   */
   public WorkerDto findById(int workerId) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement("select * from worker where id = ?");
@@ -58,6 +82,12 @@ public class WorkerService {
     return getWorker(resultSet);
   }
 
+  /**
+   * Method for find post name of worker
+   *
+   * @return String (post name)
+   * @exception SQLException - error in sql query
+   */
   public String findWorkerPost(int workerId) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement(
@@ -72,6 +102,12 @@ public class WorkerService {
     }
   }
 
+  /**
+   * Method for find worker id by name
+   *
+   * @return Integer (worker id)
+   * @exception SQLException - error in sql query
+   */
   public int findWorkerId(String name) throws SQLException {
     name = name.replaceAll("\"", "");
     String[] arr = name.split(" ");
@@ -86,6 +122,12 @@ public class WorkerService {
     return getWorker(resultSet).getId();
   }
 
+  /**
+   * Method for find all free guides in this time
+   *
+   * @return List of WorkerDto
+   * @exception SQLException - error in sql query
+   */
   public List<WorkerDto> findAllFreeGid() throws SQLException {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     //    LocalDateTime dateTime = LocalDateTime.now();
@@ -101,6 +143,12 @@ public class WorkerService {
     return getWorkers(resultSet);
   }
 
+  /**
+   * Method for find count of excursion a certain worker
+   *
+   * @return Integer (count of excursion)
+   * @exception SQLException - error in sql query
+   */
   public Integer findCountOfExcursion(int workerId) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement(
@@ -114,6 +162,12 @@ public class WorkerService {
     }
   }
 
+  /**
+   * Method for find count of hours that a particular worker has
+   *
+   * @return Integer (count of hours)
+   * @exception SQLException - error in sql query
+   */
   public Integer findCountOfHour(int workerId) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement(
@@ -128,6 +182,12 @@ public class WorkerService {
     }
   }
 
+  /**
+   * Method for get list of WorkerDto by the result set. Almost this method for fix duplicate code
+   *
+   * @return List of WorkerDto
+   * @exception SQLException - error in sql query
+   */
   private List<WorkerDto> getWorkers(ResultSet resultSet) throws SQLException {
     ArrayList<WorkerDto> workers = new ArrayList<>();
     while (resultSet.next()) {
@@ -146,6 +206,13 @@ public class WorkerService {
     return workers;
   }
 
+  /**
+   * Method for get WorkerDto by the result set.
+   * Almost this method for fix duplicate code
+   *
+   * @return WorkerDto
+   * @exception SQLException - error in sql query
+   */
   private WorkerDto getWorker(ResultSet resultSet) throws SQLException {
     if (resultSet.next()) {
       return new WorkerDto(
