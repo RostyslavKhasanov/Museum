@@ -25,4 +25,5 @@ public class WorkerDto {
   List<ExcursionDto> excursions;
   private Integer countExcursion;
   private Integer countHour;
+  private String positionName;
 }

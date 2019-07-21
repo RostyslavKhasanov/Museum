@@ -14,6 +14,7 @@
     <h6>Worker id: ${(worker.getId())}</h6>
     <h6>First name: ${(worker.getFirstName())}</h6>
     <h6>Last name: ${(worker.getLastName())}</h6>
+    <h6>Post: ${(worker.getPositionName())}</h6>
     <br>
     <c:forEach items="${worker.getHalls()}" var="item">
         <h6>Serves ${(item.getName())}</h6>

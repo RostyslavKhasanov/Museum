@@ -58,18 +58,18 @@ public class WorkerService {
     return getWorker(resultSet);
   }
 
-  public WorkerDto findWorkerPost(int workerId) throws SQLException {
+  public String findWorkerPost(int workerId) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement(
-            "SELECT * FROM post p join worker w on w.position_id = p.id "
-                + "where w.id ="
-                + workerId
-                + ";");
+            "SELECT * FROM post p join worker w on w.position_id = p.id where w.id = ?;");
     preparedStatement.setInt(1, workerId);
 
     ResultSet resultSet = preparedStatement.executeQuery();
-
-    return getWorker(resultSet);
+    if (resultSet.next()) {
+      return resultSet.getString("name");
+    } else {
+      return "";
+    }
   }
 
   public int findWorkerId(String name) throws SQLException {
@@ -140,7 +140,8 @@ public class WorkerService {
               hallService.findByWorkerId(resultSet.getInt(id)),
               excursionService.findByWorkerId(resultSet.getInt(id)),
               findCountOfExcursion(resultSet.getInt(id)),
-              findCountOfHour(resultSet.getInt(id))));
+              findCountOfHour(resultSet.getInt(id)),
+              findWorkerPost(resultSet.getInt(id))));
     }
     return workers;
   }
@@ -155,7 +156,8 @@ public class WorkerService {
           hallService.findByWorkerId(resultSet.getInt(id)),
           excursionService.findByWorkerId(resultSet.getInt(id)),
           findCountOfExcursion(resultSet.getInt(id)),
-          findCountOfHour(resultSet.getInt(id)));
+          findCountOfHour(resultSet.getInt(id)),
+          findWorkerPost(resultSet.getInt(id)));
     } else {
       throw new BadIdException("Worker with entered id doesn't exist");
     }
