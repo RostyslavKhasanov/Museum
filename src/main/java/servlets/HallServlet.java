@@ -1,5 +1,6 @@
 package servlets;
 
+import dto.ExhibitDto;
 import dto.HallDto;
 import jdbc.Connector;
 import services.ExhibitService;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
 
 @WebServlet("/hall")
 public class HallServlet extends HttpServlet {
@@ -33,27 +33,21 @@ public class HallServlet extends HttpServlet {
       return;
     }
 
-    String idParam = req.getParameter("id");
+    String idHall = req.getParameter("id");
 
-    if (idParam != null) {
+    if (idHall != null) {
       try {
-        Integer id = Integer.valueOf(idParam);
-        HallDto hallDto = hallService.findById(id);
-        req.setAttribute("hall", hallDto);
-        req.getRequestDispatcher("WEB-INF/static/hallInfo.jsp").forward(req, resp);
-      } catch (NumberFormatException e) {
-        System.out.println(
-            "You have to input number that low than: "
-                + Integer.MAX_VALUE
-                + "or great than "
-                + Integer.MIN_VALUE);
+        Integer id = Integer.valueOf(idHall);
+        List<ExhibitDto> exhibits = exhibitService.findByHallId(id);
+        req.setAttribute("exhibits", exhibits);
+        req.getRequestDispatcher("WEB-INF/static/exhibitsByHall.jsp").forward(req, resp);
       } catch (SQLException e) {
         e.printStackTrace();
       }
     } else {
       try {
-        List<HallDto> hallDtos = hallService.findAll();
-        req.setAttribute("hall", hallDtos);
+        List<HallDto> halls = hallService.findAll();
+        req.setAttribute("hall", halls);
         req.getRequestDispatcher("WEB-INF/static/hall.jsp").forward(req, resp);
       } catch (SQLException e) {
         e.printStackTrace();

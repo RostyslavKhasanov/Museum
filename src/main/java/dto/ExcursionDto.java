@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class ExcursionDto {
   private Integer id;
-  private Date begin;
-  private Date end;
-  private WorkerDto workerDto;
+  private LocalDateTime begin;
+  private LocalDateTime end;
+  private Integer worker_id;
 }

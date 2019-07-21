@@ -55,4 +55,24 @@ public class HallService {
           exhibitService.findByHallId(resultSet.getInt(ID)));
     } else throw new BadIdException("In hall no row with id " + id);
   }
+
+  public List<HallDto> findByWorkerId(int id) throws SQLException {
+    PreparedStatement preparedStatement =
+        connection.prepareStatement("select * from museum.hall where worker_id = ?");
+    preparedStatement.setInt(1, id);
+
+    ResultSet resultSet = preparedStatement.executeQuery();
+    ArrayList<HallDto> halls = new ArrayList<>();
+    return getHalls(resultSet, halls);
+  }
+
+  private List<HallDto> getHalls(ResultSet resultSet, ArrayList halls) throws SQLException {
+    while (resultSet.next()) {
+      halls.add(
+          new HallDto(
+              resultSet.getInt(ID), resultSet.getInt(WORKER_ID),
+                  resultSet.getString(NAME), exhibitService.findByHallId(resultSet.getInt(ID))));
+    }
+    return halls;
+  }
 }

@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="count" value="0" scope="request" />
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -10,25 +12,31 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"/>
-<div class="card">
-    <h6>Worker id: ${(worker.getId())}</h6>
-    <h6>First name: ${(worker.getFirstName())}</h6>
-    <h6>Last name: ${(worker.getLastName())}</h6>
-    <h6>Post: ${(worker.getPositionName())}</h6>
-    <br>
-    <c:forEach items="${worker.getHalls()}" var="item">
-        <h6>Serves ${(item.getName())}</h6>
-    </c:forEach>
-    <c:forEach items="${worker.getExcursions()}" var="item">
-        <h6>Excursion: begin - ${(item.getBegin())} end - ${(item.getEnd())}</h6>
-    </c:forEach>
-</div>
-<div class="col-5">
-    <c:forEach items="${halls}" var="item">
-        <c:forEach items="${item.getExhibits()}" var="item1">
-            <h6>${(item1.getName())}</h6>
-        </c:forEach>
-    </c:forEach>
+<div class="row no-gutters">
+    <div class="col"></div>
+    <div class="col-6">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Count of excursions</th>
+                <th scope="col">Hours</th>
+            </tr>
+            </thead>
+            <c:forEach items="${guides}" var="item">
+                <tr>
+                    <th scope="row">${(item.getId())}</th>
+                    <td>${(item.getFirstName())}</td>
+                    <td>${(item.getLastName())}</td>
+                    <td>${(item.getCountExcursion())}</td>
+                    <td>${(item.getCountHour())}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+    <div class="col"></div>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -41,3 +49,4 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 </html>
+
