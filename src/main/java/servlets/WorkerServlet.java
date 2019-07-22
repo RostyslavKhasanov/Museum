@@ -2,6 +2,7 @@ package servlets;
 
 import dto.HallDto;
 import dto.WorkerDto;
+import exceptions.BadIdException;
 import jdbc.Connector;
 import services.ExcursionService;
 import services.ExhibitService;
@@ -56,13 +57,16 @@ public class WorkerServlet extends HttpServlet {
     if (nameParam != null) {
       try {
         workerId = workerService.findWorkerId(nameParam);
-        System.out.println(workerId);
         List<HallDto> halls = hallService.findByWorkerId(workerId);
         req.setAttribute("halls", halls);
         req.setAttribute("worker", workerService.findById(workerId));
         req.getRequestDispatcher("WEB-INF/static/workerExhibits.jsp").forward(req, resp);
       } catch (SQLException e) {
         e.printStackTrace();
+      } catch (ArrayIndexOutOfBoundsException e) {
+        req.getRequestDispatcher("WEB-INF/static/error.jsp").forward(req, resp);
+      } catch (BadIdException e) {
+        req.getRequestDispatcher("WEB-INF/static/error.jsp").forward(req, resp);
       }
     }
     if (idParam != null) {
