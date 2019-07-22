@@ -17,6 +17,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Servlet for Worker logic.
+ *
+ * @author Rostyslav Khasanov
+ * @version 1.0
+ */
 @WebServlet("/worker")
 public class WorkerServlet extends HttpServlet {
 
