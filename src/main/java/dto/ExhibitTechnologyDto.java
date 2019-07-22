@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Transfer data object for Exhibit statistic
+ * Transfer data object for Exhibit statistic.
  *
  * @author Nazar Stasyk
  * @version 1.0
