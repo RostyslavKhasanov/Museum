@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,13 +131,12 @@ public class WorkerService {
    */
   public List<WorkerDto> findAllFreeGid() throws SQLException {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    //    LocalDateTime dateTime = LocalDateTime.now();
-    //    String formattedDateTime = dateTime.format(formatter);
-    String formattedDateTime = "2019-07-14 11:00";
+    LocalDateTime dateTime = LocalDateTime.now();
+    String formattedDateTime = dateTime.format(formatter);
     PreparedStatement preparedStatement =
         connection.prepareStatement(
-            "select * from  worker w join excursion e on e.worker_id = w.id where e.begin > ?"
-                + "and e.end > ? group by w.fName");
+            "select w.* from  worker w join excursion e on e.worker_id = w.id where w.id not in"
+                + "(select e.worker_id from excursion e where e.begin < ? and e.end > ?) group by w.id");
     preparedStatement.setString(1, formattedDateTime);
     preparedStatement.setString(2, formattedDateTime);
     ResultSet resultSet = preparedStatement.executeQuery();

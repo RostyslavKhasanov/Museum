@@ -10,6 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for serve Hall.
+ *
+ * @author Kateryna Horokh
+ * @version 1.0
+ */
 public class HallService {
   private Connection connection;
 
@@ -23,6 +29,12 @@ public class HallService {
     this.exhibitService = exhibitService;
   }
 
+  /**
+   * Method that find and return all Halls from DB.
+   *
+   * @return list of HallDto.
+   * @exception SQLException - error in sql query.
+   */
   public List<HallDto> findAll() throws SQLException {
     PreparedStatement preparedStatement = connection.prepareStatement("select * from museum.hall");
 
@@ -40,6 +52,13 @@ public class HallService {
     return halls;
   }
 
+  /**
+   * Method that find Hall by id.
+   *
+   * @return HallDto
+   * @exception SQLException - error in sql query.
+   * @exception BadIdException - call with bad id to DB.
+   */
   public HallDto findById(Integer id) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement("select * from museum.hall where " + ID + " = ?");
