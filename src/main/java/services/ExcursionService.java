@@ -92,7 +92,8 @@ public class ExcursionService {
   }
 
   /**
-   * Method for get list of ExcursionDto by the result set. Almost this method for fix duplicate code.
+   * Method for get list of ExcursionDto by the result set. Almost this method for fix duplicate
+   * code.
    *
    * @return ExcursionDto
    * @exception SQLException - error in sql query
