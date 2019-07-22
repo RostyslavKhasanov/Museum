@@ -20,14 +20,13 @@ import java.util.List;
  */
 public class ExhibitService {
 
-  private Connection connection;
-
   private final String ID = "id";
   private final String AUTHOR_ID = "author_id";
   private final String HALL_ID = "hall_Id";
   private final String NAME = "name";
   private final String MATERIAL = "material";
   private final String TECHNOLOGY = "technology";
+  private Connection connection;
 
   public ExhibitService(Connection connection) {
     this.connection = connection;
@@ -84,6 +83,7 @@ public class ExhibitService {
       throw new BadIdException("In DB no row with id " + id);
     }
   }
+
   /**
    * Method that find Exhibit by Hall.
    *

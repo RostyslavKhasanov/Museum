@@ -17,7 +17,7 @@
 <jsp:include page="menu.jsp"/>
 <div class="container" style="display: flex; flex-wrap: nowrap; justify-content: space-between">
     <div class="material-container">
-        <table class="table table-hover text-muted">
+        <table class="table text-muted">
             <tr>
                 <th scope="col">Material name</th>
                 <th scope="col">Count of material</th>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="technology-container">
-        <table class="table table-hover text-muted">
+        <table class="table text-muted">
             <tr>
                 <th scope="col">Technology name</th>
                 <th scope="col">Count of technology</th>

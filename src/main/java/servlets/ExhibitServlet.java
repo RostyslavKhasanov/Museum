@@ -15,9 +15,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * This is servlet for Exhibit logic.
+ *
+ * @author Nazar Stasyuk
+ * @version 1.0
+ */
 @WebServlet("/exhibit")
 public class ExhibitServlet extends HttpServlet {
-
+  /** Method for realization get method. */
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
@@ -52,14 +58,15 @@ public class ExhibitServlet extends HttpServlet {
     } else if (statParam != null) {
       try {
         List<ExhibitMaterialDto> exhibitMaterials = exhibitService.findExhibitMaterialStatistic();
-        List<ExhibitTechnologyDto> exhibitTechnologies = exhibitService.findExhibitTechnologyStatistic();
+        List<ExhibitTechnologyDto> exhibitTechnologies =
+            exhibitService.findExhibitTechnologyStatistic();
         req.setAttribute("exhibitMaterials", exhibitMaterials);
         req.setAttribute("exhibitTechnologies", exhibitTechnologies);
         req.getRequestDispatcher("WEB-INF/static/exhibitStatistic.jsp").forward(req, resp);
       } catch (SQLException e) {
         e.printStackTrace();
       }
-       } else {
+    } else {
       try {
         List<ExhibitDto> exhibitDtoList = exhibitService.findAll();
         req.setAttribute("exhibits", exhibitDtoList);

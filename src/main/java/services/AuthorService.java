@@ -20,9 +20,9 @@ public class AuthorService {
 
   private Connection connection;
 
-  private String ID = "id";
-  private String FNAME = "fName";
-  private String SNAME = "sName";
+  private String id = "id";
+  private String firstName = "fName";
+  private String secondName = "sName";
 
   public AuthorService(Connection connection) {
     this.connection = connection;
@@ -36,17 +36,20 @@ public class AuthorService {
    */
   public AuthorDto findById(Integer id) throws SQLException {
     PreparedStatement preparedStatement =
-        connection.prepareStatement("select * from author where " + ID + " = ?");
+        connection.prepareStatement("select * from author where " + this.id + " = ?");
     preparedStatement.setInt(1, id);
     ResultSet resultSet = preparedStatement.executeQuery();
 
     if (resultSet.next()) {
       return new AuthorDto(
-          resultSet.getInt(ID), resultSet.getString(FNAME), resultSet.getString(SNAME));
+          resultSet.getInt(this.id),
+          resultSet.getString(firstName),
+          resultSet.getString(secondName));
     } else {
       throw new BadIdException("Bad author id " + id);
     }
   }
+
   /**
    * Method that find and return all Authors from DB.
    *
@@ -62,7 +65,9 @@ public class AuthorService {
     while (resultSet.next()) {
       authors.add(
           new AuthorDto(
-              resultSet.getInt(ID), resultSet.getString(FNAME), resultSet.getString(SNAME)));
+              resultSet.getInt(id),
+              resultSet.getString(firstName),
+              resultSet.getString(secondName)));
     }
     return authors;
   }
