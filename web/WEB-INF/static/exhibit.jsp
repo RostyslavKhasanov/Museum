@@ -19,13 +19,18 @@
 <jsp:include page="menu.jsp"/>
 
 <button type="button" class="btn btn-primary" style="float: right" onclick="goToStatistic()">Exhibit statistic</button>
-<div class="list-group">
-    <c:forEach items="${exhibits}" var="item">
-        <a href="?id=${item.id}" class="list-group-item list-group-item-action disabled">${item.name}</a>
-    </c:forEach>
-</div>
-
-
+<c:choose>
+    <c:when test="${not empty exhibits}">
+        <div class="list-group">
+            <c:forEach items="${exhibits}" var="item">
+                <a href="?id=${item.id}" class="list-group-item list-group-item-action disabled">${item.name}</a>
+            </c:forEach>
+        </div>
+    </c:when>
+    <c:otherwise>
+        <h3 class="w3-wide" style="margin: 20px;">Not found any exhibit!</h3>
+    </c:otherwise>
+</c:choose>
 
 
 </body>

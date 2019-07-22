@@ -14,12 +14,22 @@
 <body>
 <jsp:include page="menu.jsp"/>
 
-<div class="list-group">
-    <c:forEach items="${authors}" var="item">
-        <a href="?id=${item.id}"
-           class="list-group-item list-group-item-action disabled">${item.firstName} ${item.secondName}</a>
-    </c:forEach>
-</div>
+<c:choose>
+    <c:when test="${not empty authors}">
+        <div class="list-group">
+            <c:forEach items="${authors}" var="item">
+                <a href="?id=${item.id}"
+                   class="list-group-item list-group-item-action disabled">${item.firstName} ${item.secondName}</a>
+            </c:forEach>
+        </div>
+    </c:when>
+    <c:otherwise>
+        <h3 class="w3-wide" style="margin: 20px;">Not found any author!</h3>
+    </c:otherwise>
+</c:choose>
+
+
+
 
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
