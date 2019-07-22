@@ -110,18 +110,16 @@ public class WorkerService {
    * @exception SQLException - error in sql query
    */
   public int findWorkerId(String name) throws SQLException {
+    name = name.toLowerCase();
     name = name.replaceAll("\"", "");
     String[] arr = name.split(" ");
-    String firstName = "";
-    String lastName = "";
-    try {
-      firstName = arr[0];
-      lastName = arr[1];
-    } catch (ArrayIndexOutOfBoundsException e) {
-      System.out.println("Enter first and last name of worker");
+    if (arr.length > 3) {
+      throw new ArrayIndexOutOfBoundsException();
     }
+    String firstName = (arr[0] == null) ? "" : arr[0];
+    String lastName = (arr[1] == null) ? "" : arr[1];
     PreparedStatement preparedStatement =
-        connection.prepareStatement("SELECT * FROM worker where fName = ? and sName = ?");
+            connection.prepareStatement("SELECT * FROM worker where lower(fName) = ? and lower(sName) = ?");
     preparedStatement.setString(1, firstName);
     preparedStatement.setString(2, lastName);
 
