@@ -8,6 +8,12 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Transfer data object for Hall
+ *
+ * @author Kateryna Horokh
+ * @version 1.0
+ */
 @Getter
 @Setter
 @NoArgsConstructor

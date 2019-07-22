@@ -83,6 +83,14 @@ public class ExhibitService {
     }
   }
 
+  /**
+   * Method that find Exhibit by Hall's id.
+   *
+   * @author Kateryna Horokh
+   *
+   * @return List of ExhibitDto
+   * @exception SQLException - error in sql query.
+   */
   public List<ExhibitDto> findByHallId(Integer id) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement(

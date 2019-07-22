@@ -18,24 +18,38 @@
 <div class="w3-container w3-content w3-center w3-padding-64 w3-card-8"
      style="max-width: 800px; margin: 30px">
     <h2 class="w3-wide">Excursions in given time period:</h2>
-   <%-- <c:choose>
+    <c:choose>
         <c:when test="${not empty excursions}">
             <div class="list-group">
-                <c:forEach items="${excursion}" var="item">
-                    <a href="?id=${item.id}" class="list-group-item list-group-item-action disabled">
-                            ${(item.getName())}, ${(item.getBegin())},  ${(item.getEnd())}, ${(item.getWorker_id())}</a>
-                </c:forEach>
+                <div class="col-6">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Begin</th>
+                            <th scope="col">End</th>
+                            <th scope="col">Price, UAH</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${excursions}" var="item">
+                            <tr>
+                                <th scope="row">${item.id}</th>
+                                <td>${item.begin}</td>
+                                <td>${item.end}</td>
+                                <td>${item.price}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <h5>Count of excursions at this period: ${excursionsStatistic}</h5>
+                </div>
             </div>
         </c:when>
         <c:otherwise>
             <h3 class="w3-wide">not found!</h3>
         </c:otherwise>
-    </c:choose>--%>
-
-    <c:forEach items="${excursions}" var="item">
-        <a href="?id=${item.id}" class="list-group-item list-group-item-action disabled">
-                 ${item.begin},  ${item.end}</a>
-    </c:forEach>
+    </c:choose>
 </div>
 
 </body>

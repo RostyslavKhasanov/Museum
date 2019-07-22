@@ -10,14 +10,39 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        <%@include file="style/index.css"%>
+    </style>
+    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <jsp:include page="menu.jsp"/>
 
 <div class="list-group">
-    <c:forEach items="${exhibits}" var="item">
-        <p class="list-group-item list-group-item-action disabled">${item.name}</p>
-    </c:forEach>
+    <div class="col-6">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Material</th>
+                <th scope="col">Technology</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${exhibits}" var="item">
+                <tr>
+                    <th scope="row">${item.id}</th>
+                    <td>${item.name}</td>
+                    <td>${item.material}</td>
+                    <td>${item.technology}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>
