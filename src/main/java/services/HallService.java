@@ -75,6 +75,12 @@ public class HallService {
     } else throw new BadIdException("In hall no row with id " + id);
   }
 
+  /**
+   * Method that find list of HallDto by worker id.
+   *
+   * @return List of HallDto
+   * @exception SQLException - error in sql query.
+   */
   public List<HallDto> findByWorkerId(int id) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement("select * from museum.hall where worker_id = ?");
@@ -85,6 +91,12 @@ public class HallService {
     return getHalls(resultSet, halls);
   }
 
+  /**
+   * Method for get list of HallDto by the result set. Almost this method for fix duplicate code
+   *
+   * @return List of HallDto
+   * @exception SQLException - error in sql query
+   */
   private List<HallDto> getHalls(ResultSet resultSet, ArrayList halls) throws SQLException {
     while (resultSet.next()) {
       halls.add(
