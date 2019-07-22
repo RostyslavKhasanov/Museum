@@ -48,18 +48,7 @@ public class ExcursionService {
                 + "'");
     ResultSet resultSet = preparedStatement.executeQuery();
 
-    List<ExcursionDto> excursions = new ArrayList<>();
-
-    while (resultSet.next()) {
-      excursions.add(
-          new ExcursionDto(
-              resultSet.getInt(ID),
-              resultSet.getObject(BEGIN, LocalDateTime.class),
-              resultSet.getObject(END, LocalDateTime.class),
-              resultSet.getDouble(PRICE),
-              resultSet.getInt(WORKER_ID)));
-    }
-    return excursions;
+    return getExcursions(resultSet);
   }
 
   /**
@@ -85,5 +74,40 @@ public class ExcursionService {
     } else {
       return 0;
     }
+  }
+
+  /**
+   * Method for find excursion particular worker.
+   *
+   * @return List of ExcursionDto
+   * @exception SQLException - error in sql query.
+   */
+  public List<ExcursionDto> findByWorkerId(int worker_id) throws SQLException {
+    PreparedStatement preparedStatement =
+        connection.prepareStatement("select * from museum.excursion where worker_id = ?");
+    preparedStatement.setInt(1, worker_id);
+
+    ResultSet resultSet = preparedStatement.executeQuery();
+    return getExcursions(resultSet);
+  }
+
+  /**
+   * Method for get list of ExcursionDto by the result set. Almost this method for fix duplicate code.
+   *
+   * @return ExcursionDto
+   * @exception SQLException - error in sql query
+   */
+  private List<ExcursionDto> getExcursions(ResultSet resultSet) throws SQLException {
+    List<ExcursionDto> excursions = new ArrayList<>();
+    while (resultSet.next()) {
+      excursions.add(
+          new ExcursionDto(
+              resultSet.getInt(ID),
+              resultSet.getObject(BEGIN, LocalDateTime.class),
+              resultSet.getObject(END, LocalDateTime.class),
+              resultSet.getDouble(PRICE),
+              resultSet.getInt(WORKER_ID)));
+    }
+    return excursions;
   }
 }
