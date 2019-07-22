@@ -112,8 +112,14 @@ public class WorkerService {
   public int findWorkerId(String name) throws SQLException {
     name = name.replaceAll("\"", "");
     String[] arr = name.split(" ");
-    String firstName = arr[0];
-    String lastName = arr[1];
+    String firstName = "";
+    String lastName = "";
+    try {
+      firstName = arr[0];
+      lastName = arr[1];
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.out.println("Enter first and last name of worker");
+    }
     PreparedStatement preparedStatement =
         connection.prepareStatement("SELECT * FROM worker where fName = ? and sName = ?");
     preparedStatement.setString(1, firstName);
@@ -225,7 +231,7 @@ public class WorkerService {
           findCountOfHour(resultSet.getInt(id)),
           findWorkerPost(resultSet.getInt(id)));
     } else {
-      throw new BadIdException("Worker with entered id doesn't exist");
+      throw new BadIdException("Worker doesn't exist");
     }
   }
 }
