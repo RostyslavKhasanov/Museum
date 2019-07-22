@@ -135,8 +135,8 @@ public class WorkerService {
     String formattedDateTime = dateTime.format(formatter);
     PreparedStatement preparedStatement =
         connection.prepareStatement(
-            "select w.* from  worker w join excursion e on e.worker_id = w.id where e.begin > ?"
-                + "and e.end > ? group by w.id order by w.id");
+            "select w.* from  worker w join excursion e on e.worker_id = w.id where w.id not in"
+                + "(select e.worker_id from excursion e where e.begin < ? and e.end > ?) group by w.id");
     preparedStatement.setString(1, formattedDateTime);
     preparedStatement.setString(2, formattedDateTime);
     ResultSet resultSet = preparedStatement.executeQuery();
