@@ -83,6 +83,14 @@ public class ExhibitService {
     }
   }
 
+  /**
+   * Method that find Exhibit by Hall's id.
+   *
+   * @author Kateryna Horokh
+   *
+   * @return List of ExhibitDto
+   * @exception SQLException - error in sql query.
+   */
   public List<ExhibitDto> findByHallId(Integer id) throws SQLException {
     PreparedStatement preparedStatement =
         connection.prepareStatement(
@@ -94,17 +102,17 @@ public class ExhibitService {
 
     ResultSet resultSet = preparedStatement.executeQuery();
 
-   ArrayList<ExhibitDto> exhibits = new ArrayList<>();
+    ArrayList<ExhibitDto> exhibits = new ArrayList<>();
 
     while (resultSet.next()) {
       exhibits.add(
-              new ExhibitDto(
-                      resultSet.getInt(ID),
-                      resultSet.getInt(AUTHOR_ID),
-                      resultSet.getInt(HALL_ID),
-                      resultSet.getString(NAME),
-                      resultSet.getString(MATERIAL),
-                      resultSet.getString(TECHNOLOGY)));
+          new ExhibitDto(
+              resultSet.getInt(ID),
+              resultSet.getInt(AUTHOR_ID),
+              resultSet.getInt(HALL_ID),
+              resultSet.getString(NAME),
+              resultSet.getString(MATERIAL),
+              resultSet.getString(TECHNOLOGY)));
     }
     return exhibits;
   }

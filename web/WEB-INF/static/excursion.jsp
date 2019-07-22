@@ -8,8 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:url value="/excursion" var="find"/>
-
 <html>
 <head>
     <title>Museum</title>
@@ -19,19 +17,19 @@
 <body>
 <jsp:include page="menu.jsp"/>
 
-<form method="post" action="${find}" >
-    <div style="margin: 10px">
-        <%--@declare id="startdate"--%><%--@declare id="enddate"--%>
-        <h4 style="margin: 10px">Please, enter the period you want to visit excursion in our museum.</h4>
-        <label for="startDate">Start:</label>
-        <input id="datetime-start" type="datetime-local" name="dateStart" value="${start}"/><br/>
-        <br/>
-        <label for="endDate">End:</label>
-        <input id="datetime-end" type="datetime-local" name="dateEnd" value="${end}"/><br/>
-        <input style="margin: 20px 0" type="submit" value="Submit"/>
-    </div>
-</form>
+<h2 style="margin: 10px">Please, enter the period you want to visit excursion in our museum.</h2>
+
+<div style="margin: 10px">
+    <form method="post">
+        <label for="startTime">Start:</label>
+        <input id="startTime" type="datetime-local" name="startTime"><br>
+        <label for="endTime">End:</label>
+        <input id="endTime" type="datetime-local" name="endTime"><br>
+        <input type="submit" value="Submit" style="margin: 20px 0">
+    </form>
+</div>
 </body>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
