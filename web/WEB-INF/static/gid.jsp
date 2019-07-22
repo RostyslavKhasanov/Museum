@@ -37,6 +37,7 @@
         </div>
         <div class="col">
             <button type="button" class="btn btn-primary" onclick="redirect()">Available guides</button>
+            <br><br>
             <button type="button" class="btn btn-primary" onclick="redirectStat()">View guides statistic</button>
         </div>
     </div>
@@ -45,10 +46,10 @@
 </body>
 <script>
     function redirect() {
-        document.location.href = "http://localhost:8080/worker?date=s";
+        document.location.href = "http://localhost:8080/worker?date=now";
     }
     function redirectStat() {
-        document.location.href = "http://localhost:8080/worker?stat=s";
+        document.location.href = "http://localhost:8080/worker?stat=stat";
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
