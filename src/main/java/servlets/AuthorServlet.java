@@ -47,7 +47,7 @@ public class AuthorServlet extends HttpServlet {
       } catch (SQLException e) {
         e.printStackTrace();
       }
-    } else {
+    }else {
 
       try {
         List<AuthorDto> authors = authorService.findAll();

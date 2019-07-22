@@ -18,13 +18,22 @@
 <body>
 <jsp:include page="menu.jsp"/>
 
+<button type="button" class="btn btn-primary" style="float: right" onclick="goToStatistic()">Exhibit statistic</button>
 <div class="list-group">
     <c:forEach items="${exhibits}" var="item">
         <a href="?id=${item.id}" class="list-group-item list-group-item-action disabled">${item.name}</a>
     </c:forEach>
 </div>
 
+
+
+
 </body>
+<script>
+    function goToStatistic() {
+        window.location.href = "http://localhost:8080/exhibit?stat=s"
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
