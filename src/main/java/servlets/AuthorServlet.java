@@ -13,9 +13,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * This is servlet for Author logic.
+ *
+ * @author Nazar Stasyuk
+ * @version 1.0
+ */
 @WebServlet("/author")
 public class AuthorServlet extends HttpServlet {
 
+  /** Method for realization get method. */
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
@@ -57,6 +64,5 @@ public class AuthorServlet extends HttpServlet {
         e.printStackTrace();
       }
     }
-
   }
 }

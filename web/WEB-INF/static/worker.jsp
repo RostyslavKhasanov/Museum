@@ -20,9 +20,10 @@
 </head>
 <body>
 <jsp:include page="menu.jsp"/>
-<div class = "worker-container">
+<div class="worker-container">
     <div class="row">
-        <div class="col"></div>
+        <div class="col">
+        </div>
         <div class="col-6">
             <table class="table table-hover">
                 <thead>
@@ -35,29 +36,37 @@
                 <tbody>
                 <c:forEach items="${workers}" var="item">
                     <tr>
-                        <th scope="row"><a href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getId())}</a></th>
-                        <td><a href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getFName())}</a></td>
-                        <td><a href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getSName())}</a></td>
+                        <th scope="row"><a
+                                href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getId())}</a>
+                        </th>
+                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getFirstName())}</a></td>
+                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getLastName())}</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <div class="col-10">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="spanName">Full name</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="name">
+            </div>
+                <button type="button" class="btn btn-primary" onclick="findByName()">Search</button>
+            </div>
+        </div>
     </div>
 </div>
-<%--    <%--%>
-<%--        ArrayList<dto.ExhibitDto> list = (ArrayList<dto.ExhibitDto>) request.getAttribute("exhibits");--%>
-<%--        for (ExhibitDto exhibitDto : list) {--%>
-<%--            out.println(exhibitDto.getId());--%>
-<%--            out.println(exhibitDto.getName());--%>
-<%--            out.println(exhibitDto.getMaterial());--%>
-<%--            out.println(exhibitDto.getTechnology());--%>
-<%--            out.write("<br>");--%>
-<%--        }--%>
-<%--    %>--%>
 </table>
 </body>
+<script>
+    function findByName() {
+        var fName = document.getElementById("name").value;
+        document.location.href = "http://localhost:8080/worker?name=" + fName;
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

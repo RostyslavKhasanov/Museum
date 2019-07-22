@@ -16,7 +16,7 @@
 
 <div class="info" style="margin: 20px">
     <div class="name">Name of the exhibit is: ${exhibit.name}</div>
-    <div class="material">It is of ${exhibit.material}</div>
+    <div class="material">Material is: ${exhibit.material}</div>
     <div class="technology">Create technology: ${exhibit.technology}</div>
 </div>
 

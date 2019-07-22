@@ -1,6 +1,8 @@
 package servlets;
 
 import dto.ExhibitDto;
+import dto.ExhibitMaterialDto;
+import dto.ExhibitTechnologyDto;
 import jdbc.Connector;
 import services.ExhibitService;
 
@@ -13,9 +15,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * This is servlet for Exhibit logic.
+ *
+ * @author Nazar Stasyuk
+ * @version 1.0
+ */
 @WebServlet("/exhibit")
 public class ExhibitServlet extends HttpServlet {
-
+  /** Method for realization get method. */
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
@@ -30,6 +38,7 @@ public class ExhibitServlet extends HttpServlet {
     }
 
     String idParam = req.getParameter("id");
+    String statParam = req.getParameter("stat");
 
     if (idParam != null) {
       try {
@@ -43,6 +52,17 @@ public class ExhibitServlet extends HttpServlet {
                 + Integer.MAX_VALUE
                 + "or great than "
                 + Integer.MIN_VALUE);
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    } else if (statParam != null) {
+      try {
+        List<ExhibitMaterialDto> exhibitMaterials = exhibitService.findExhibitMaterialStatistic();
+        List<ExhibitTechnologyDto> exhibitTechnologies =
+            exhibitService.findExhibitTechnologyStatistic();
+        req.setAttribute("exhibitMaterials", exhibitMaterials);
+        req.setAttribute("exhibitTechnologies", exhibitTechnologies);
+        req.getRequestDispatcher("WEB-INF/static/exhibitStatistic.jsp").forward(req, resp);
       } catch (SQLException e) {
         e.printStackTrace();
       }

@@ -1,12 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.ExhibitDto" %><%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 7/18/2019
-  Time: 10:03 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -35,29 +27,30 @@
                 <tbody>
                 <c:forEach items="${workers}" var="item">
                     <tr>
-                        <th scope="row"><a href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getId())}</a></th>
-                        <td><a href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getFName())}</a></td>
-                        <td><a href="http://localhost:8080/museum/worker?id=${(item.getId())}">${(item.getSName())}</a></td>
+                        <th scope="row"><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getId())}</a></th>
+                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getFirstName())}</a></td>
+                        <td><a href="http://localhost:8080/worker?id=${(item.getId())}">${(item.getLastName())}</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" onclick="redirect()">Available guides</button>
+            <button type="button" class="btn btn-primary" onclick="redirectStat()">View guides statistic</button>
+        </div>
     </div>
 </div>
-<%--    <%--%>
-<%--        ArrayList<dto.ExhibitDto> list = (ArrayList<dto.ExhibitDto>) request.getAttribute("exhibits");--%>
-<%--        for (ExhibitDto exhibitDto : list) {--%>
-<%--            out.println(exhibitDto.getId());--%>
-<%--            out.println(exhibitDto.getName());--%>
-<%--            out.println(exhibitDto.getMaterial());--%>
-<%--            out.println(exhibitDto.getTechnology());--%>
-<%--            out.write("<br>");--%>
-<%--        }--%>
-<%--    %>--%>
 </table>
 </body>
+<script>
+    function redirect() {
+        document.location.href = "http://localhost:8080/worker?date=s";
+    }
+    function redirectStat() {
+        document.location.href = "http://localhost:8080/worker?stat=s";
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -67,4 +60,3 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-</html>
